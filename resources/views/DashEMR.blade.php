@@ -19,10 +19,8 @@
     @inertiaHead
 </head>
 
-<body class="font-sans leading-normal tracking-normal bg-gray-200"">
-    <div class="flex ">
+<body class="font-sans leading-normal tracking-normal">
     @inertia
-    </div>
 </body>
 
 </html>

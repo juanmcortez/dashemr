@@ -12,7 +12,12 @@ module.exports = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Nunito', ...defaultTheme.fontFamily.sans],
+                sans: ['Amiko', ...defaultTheme.fontFamily.sans],
+            },
+            colors: {
+                twitter: '#00aaec',
+                facebook: '#4267b2',
+                linkedin: '#2977c9',
             },
         },
     },

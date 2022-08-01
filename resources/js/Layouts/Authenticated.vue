@@ -44,7 +44,9 @@ const showingNavigationDropdown = ref(false);
                                         <span class="inline-flex rounded-md">
                                             <button type="button"
                                                 class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md hover:text-gray-700 focus:outline-none">
-                                                {{ $page.props.auth.user.name }}
+                                                Welcome {{ $page.props.auth.user.lastName }}, {{
+                                                        $page.props.auth.user.firstName
+                                                }} {{ $page.props.auth.user.middleName }}
 
                                                 <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
                                                     viewBox="0 0 20 20" fill="currentColor">
@@ -87,16 +89,24 @@ const showingNavigationDropdown = ref(false);
                 <!-- Responsive Navigation Menu -->
                 <div :class="{ 'block': showingNavigationDropdown, 'hidden': !showingNavigationDropdown }"
                     class="sm:hidden">
-                    <div class="pt-2 pb-3 space-y-1">
+                    <div class="pt-2 space-y-1">
                         <BreezeResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
+                        </BreezeResponsiveNavLink>
+                    </div>
+                    <div class="pt-2 pb-3 space-y-1">
+                        <BreezeResponsiveNavLink :href="route('patients.all')"
+                            :active="route().current('patients.all')">
+                            Patients
                         </BreezeResponsiveNavLink>
                     </div>
 
                     <!-- Responsive Settings Options -->
                     <div class="pt-4 pb-1 border-t border-gray-200">
                         <div class="px-4">
-                            <div class="text-base font-medium text-gray-800">{{ $page.props.auth.user.name }}</div>
+                            <div class="text-base font-medium text-gray-800">Welcome {{ $page.props.auth.user.lastName
+                            }}, {{ $page.props.auth.user.firstName }} {{ $page.props.auth.user.middleName }}</div>
+                            <div class="text-sm font-medium text-gray-500">{{ $page.props.auth.user.username }}</div>
                             <div class="text-sm font-medium text-gray-500">{{ $page.props.auth.user.email }}</div>
                         </div>
 

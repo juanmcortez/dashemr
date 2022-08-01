@@ -3,7 +3,7 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
-use App\Http\Controllers\Patients\PatientController;
+use App\Http\Controllers\Patients\DemographicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +22,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/patients/list/all', [PatientController::class, 'index'])->name('patients.all');
+    Route::get('/patients/list/all', [DemographicController::class, 'index'])->name('patients.all');
 });
 
 Route::redirect('/', 'login');

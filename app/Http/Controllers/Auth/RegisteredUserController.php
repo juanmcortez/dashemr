@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use Inertia\Inertia;
 use App\Models\Users\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-use Inertia\Inertia;
+use Illuminate\Auth\Events\Registered;
+use App\Providers\RouteServiceProvider;
 
 class RegisteredUserController extends Controller
 {
@@ -35,15 +35,21 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'username'      => 'required|string|max:64|unique:users',
+            'firstName'     => 'string|max:64',
+            'niddleName'    => 'string|max:64',
+            'lastName'      => 'string|max:64',
+            'email'         => 'required|string|email|max:255|unique:users',
+            'password'      => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'username'      => $request->username,
+            'firstName'     => $request->firstName,
+            'niddleName'    => $request->niddleName,
+            'lastName'      => $request->lastName,
+            'email'         => $request->email,
+            'password'      => Hash::make($request->password),
         ]);
 
         event(new Registered($user));

@@ -4,6 +4,7 @@ namespace App\Models\Invoices;
 
 use App\Models\Patients\Patient;
 use App\Models\Patients\Demographic;
+use App\Models\Invoices\Extras\Problem;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -98,5 +99,16 @@ class Encounter extends Model
     public function demographicInfo()
     {
         return $this->belongsTo(Demographic::class, 'pid', 'pid');
+    }
+
+
+    /**
+     * Get problems information associated to encounter
+     *
+     * @return void
+     */
+    public function problemTab()
+    {
+        return $this->hasOne(Problem::class, 'encounter', 'encounter');
     }
 }

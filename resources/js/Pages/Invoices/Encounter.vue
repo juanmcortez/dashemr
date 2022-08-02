@@ -138,6 +138,11 @@ const props = defineProps({
                                         class="p-4 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
                                         {{ invoice.miscellaneous_tab }}</td>
                                 </tr>
+                                <tr>
+                                    <td
+                                        class="p-4 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                        {{ invoice.lab_tab }}</td>
+                                </tr>
                             </tbody>
                         </table>
 

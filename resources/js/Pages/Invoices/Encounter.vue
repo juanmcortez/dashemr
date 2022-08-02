@@ -2,6 +2,10 @@
 import Layout from '@/Layouts/Authenticated.vue';
 import { Head, Link } from '@inertiajs/inertia-vue3';
 const props = defineProps({
+    patient: {
+        type: Object,
+        default: () => ({})
+    },
     invoice: {
         type: Object,
         default: () => ({})
@@ -12,44 +16,57 @@ const props = defineProps({
 <template>
 
     <Head>
-        <title>{{ invoice.demographic_info.full_name }}'s encounter <em>#{{ invoice.pid }}.{{ invoice.encounter }}</em>
+        <title>{{ patient.demographic.full_name }}'s encounter <em>#{{ patient.pid }}.{{ invoice.encounter }}</em>
         </title>
         <meta name="author" content="Juan M. Cortéz">
         <meta name="description"
-            :content="invoice.demographic_info.full_name + '\'s encounter #' + invoice.pid + '.' + invoice.encounter">
+            :content="patient.demographic.full_name + '\'s encounter #' + patient.pid + '.' + invoice.encounter">
         <meta name="keywords" content="EMR, Health, Patients, Insurance, Payments, Dashboard">
     </Head>
     <Layout>
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                {{ invoice.demographic_info.full_name }}'s encounter #{{ invoice.pid }}.{{ invoice.encounter }}
+                {{ patient.demographic.full_name }}'s encounter #{{ patient.pid }}.{{ invoice.encounter }}
             </h2>
         </template>
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                     <div class="p-6 bg-white border-b border-gray-200">
-                        <Link :href="route('patients.show', invoice.patient_info.pid)">Back to Ledger</Link>
+                        <Link :href="route('patients.show', { patient: patient.pid })">Back to Ledger</Link>
 
                         <table
                             class="w-full mb-10 text-sm bg-white border border-collapse shadow-sm border-slate-400 dark:border-slate-500 dark:bg-slate-800">
                             <thead class="bg-slate-50 dark:bg-slate-700">
                                 <tr>
                                     <th
-                                        class="p-4 font-semibold text-center border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200">
-                                        Patient</th>
+                                        class="w-1/3 p-4 font-semibold text-center border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200">
+                                        PID</th>
+                                    <th
+                                        class="w-1/3 p-4 font-semibold text-center border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200">
+                                        External PID</th>
+                                    <th
+                                        class="w-1/3 p-4 font-semibold text-center border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200">
+                                        Created</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td
                                         class="p-4 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                        {{ invoice.patient_info }}</td>
-                                </tr>
-                                <tr>
+                                        {{ patient.pid }}</td>
                                     <td
                                         class="p-4 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                        {{ invoice.demographic_info }}</td>
+                                        {{ patient.externalPid }}</td>
+                                    <td
+                                        class="p-4 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                        {{ patient.created_at }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"
+                                        class="p-4 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                        {{ patient.demographic }}
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

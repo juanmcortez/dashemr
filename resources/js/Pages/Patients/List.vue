@@ -85,7 +85,8 @@ const props = defineProps({
                                         {{ patient.patient_info.externalPid }}</td>
                                     <td
                                         class="p-4 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                        <Link :href="route('patients.show', patient.patient_info.pid)">View</Link>
+                                        <Link :href="route('patients.show', { patient: patient.patient_info.pid })">View
+                                        </Link>
                                     </td>
                                 </tr>
                             </tbody>

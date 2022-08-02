@@ -95,7 +95,10 @@ const props = defineProps({
                                         {{ invoice }}</td>
                                     <td
                                         class="w-1/4 p-4 text-center border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                        <Link :href="route('encounter.detail', invoice.encounter)">View</Link>
+                                        <Link
+                                            :href="route('encounter.detail', { patient: patient.pid, encounter: invoice.encounter })">
+                                        View
+                                        </Link>
                                     </td>
                                 </tr>
                             </tbody>

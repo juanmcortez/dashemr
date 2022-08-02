@@ -48,7 +48,15 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
-        $patient->load('demographic', 'encounters');
+        // Retrivr all the information and load the encounters in descending order by serviceDate and encounter
+        $patient->load('demographic')
+            ->load(
+                [
+                    'encounters' => function ($query) {
+                        $query->orderBy('serviceDate', 'desc')->orderBy('encounter', 'desc');
+                    }
+                ]
+            );
         return Inertia::render('Patients/Show', ['patient' => $patient]);
     }
 

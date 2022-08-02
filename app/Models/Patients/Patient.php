@@ -2,6 +2,7 @@
 
 namespace App\Models\Patients;
 
+use App\Models\Invoices\Encounter;
 use App\Models\Patients\Demographic;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -59,5 +60,16 @@ class Patient extends Model
     public function demographic()
     {
         return $this->hasOne(Demographic::class, 'pid', 'pid');
+    }
+
+
+    /**
+     * Get encounters information associated to patient
+     *
+     * @return void
+     */
+    public function encounters()
+    {
+        return $this->hasMany(Encounter::class, 'pid', 'pid');
     }
 }

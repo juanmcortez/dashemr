@@ -18,6 +18,7 @@ class DemographicFactory extends Factory
     {
         $genre = fake()->randomElement(['male', 'female']);
         return [
+            'pid'                   => Patient::class,
             'title'                 => fake()->randomElement(['unassigned', 'mr', 'mrs', 'ms', 'dr', 'other']),
             'firstName'             => fake()->firstName($genre),
             'middleName'            => fake()->firstName($genre),

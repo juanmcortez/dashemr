@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Patients;
 use Inertia\Inertia;
 use App\Models\Patients\Patient;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePatientRequest;
-use App\Http\Requests\UpdatePatientRequest;
+use App\Http\Requests\Patients\StorePatientRequest;
+use App\Http\Requests\Patients\UpdatePatientRequest;
 
 class PatientController extends Controller
 {
@@ -17,8 +17,6 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $patients = Patient::paginate(20);
-        return Inertia::render('Patients/List', ['patients' => $patients]);
     }
 
     /**
@@ -34,7 +32,7 @@ class PatientController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorePatientRequest  $request
+     * @param  \App\Http\Requests\Patients\StorePatientRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StorePatientRequest $request)
@@ -50,7 +48,8 @@ class PatientController extends Controller
      */
     public function show(Patient $patient)
     {
-        //
+        $patient->load('demographic', 'encounters');
+        return Inertia::render('Patients/Show', ['patient' => $patient]);
     }
 
     /**
@@ -67,7 +66,7 @@ class PatientController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatePatientRequest  $request
+     * @param  \App\Http\Requests\Patients\UpdatePatientRequest  $request
      * @param  \App\Models\Patients\Patient  $patient
      * @return \Illuminate\Http\Response
      */

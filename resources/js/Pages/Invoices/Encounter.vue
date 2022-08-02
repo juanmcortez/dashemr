@@ -32,6 +32,29 @@ const props = defineProps({
                         <Link :href="route('patients.show', invoice.patient_info.pid)">Back to Ledger</Link>
 
                         <table
+                            class="w-full mb-10 text-sm bg-white border border-collapse shadow-sm border-slate-400 dark:border-slate-500 dark:bg-slate-800">
+                            <thead class="bg-slate-50 dark:bg-slate-700">
+                                <tr>
+                                    <th
+                                        class="p-4 font-semibold text-center border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200">
+                                        Patient</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td
+                                        class="p-4 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                        {{ invoice.patient_info }}</td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        class="p-4 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                        {{ invoice.demographic_info }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table
                             class="w-full mb-10 text-sm text-center bg-white border border-collapse shadow-sm border-slate-400 dark:border-slate-500 dark:bg-slate-800">
                             <thead class="bg-slate-50 dark:bg-slate-700">
                                 <tr>
@@ -94,8 +117,9 @@ const props = defineProps({
                                 </tr>
                             </tbody>
                         </table>
+
                         <table
-                            class="w-full mb-10 text-sm bg-white border border-collapse shadow-sm border-slate-400 dark:border-slate-500 dark:bg-slate-800">
+                            class="w-full text-sm bg-white border border-collapse shadow-sm border-slate-400 dark:border-slate-500 dark:bg-slate-800">
                             <thead class="bg-slate-50 dark:bg-slate-700">
                                 <tr>
                                     <th
@@ -109,30 +133,14 @@ const props = defineProps({
                                         class="p-4 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
                                         {{ invoice.problem_tab }}</td>
                                 </tr>
-                            </tbody>
-                        </table>
-                        <table
-                            class="w-full text-sm bg-white border border-collapse shadow-sm border-slate-400 dark:border-slate-500 dark:bg-slate-800">
-                            <thead class="bg-slate-50 dark:bg-slate-700">
-                                <tr>
-                                    <th
-                                        class="p-4 font-semibold text-center border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200">
-                                        Patient</th>
-                                </tr>
-                            </thead>
-                            <tbody>
                                 <tr>
                                     <td
                                         class="p-4 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                        {{ invoice.patient_info }}</td>
-                                </tr>
-                                <tr>
-                                    <td
-                                        class="p-4 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                        {{ invoice.demographic_info }}</td>
+                                        {{ invoice.miscellaneous_tab }}</td>
                                 </tr>
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>

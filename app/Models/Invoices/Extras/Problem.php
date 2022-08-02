@@ -1,0 +1,62 @@
+<?php
+
+namespace App\Models\Invoices\Extras;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+class Problem extends Model
+{
+    use HasFactory, SoftDeletes;
+
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'encounter',
+        'conditionOriginatedDate',
+        'firstConsultedDate',
+        'lastSeenDate',
+        'acuteManifestationDate',
+        'lastXRayDate',
+        'illnessAccidentPregnancy',
+        'autoAccidentState',
+        'accidentDate',
+        'employmentRelated',
+    ];
+
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'id',
+        'encounter',
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'conditionOriginatedDate'   => 'datetime:M d, Y',
+        'firstConsultedDate'        => 'datetime:M d, Y',
+        'lastSeenDate'              => 'datetime:M d, Y',
+        'acuteManifestationDate'    => 'datetime:M d, Y',
+        'lastXRayDate'              => 'datetime:M d, Y',
+        'illnessAccidentPregnancy'  => 'datetime:M d, Y',
+        'accidentDate'              => 'datetime:M d, Y',
+        'employmentRelated'         => 'boolean',
+    ];
+}

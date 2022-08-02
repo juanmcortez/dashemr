@@ -9,10 +9,6 @@
 
     <title inertia>{{ config('app.name', 'DashEMR') }}</title>
 
-    <meta name="author" content="">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-
     <!-- Scripts -->
     @routes
     @vite('resources/js/dashemr.js')

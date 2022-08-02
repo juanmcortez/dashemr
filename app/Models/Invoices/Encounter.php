@@ -6,6 +6,7 @@ use App\Models\Patients\Patient;
 use App\Models\Patients\Demographic;
 use App\Models\Invoices\Extras\Problem;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Invoices\Extras\Miscellaneous;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -110,5 +111,16 @@ class Encounter extends Model
     public function problemTab()
     {
         return $this->hasOne(Problem::class, 'encounter', 'encounter');
+    }
+
+
+    /**
+     * Get miscellaneous information associated to encounter
+     *
+     * @return void
+     */
+    public function miscellaneousTab()
+    {
+        return $this->hasOne(Miscellaneous::class, 'encounter', 'encounter');
     }
 }

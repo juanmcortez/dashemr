@@ -7,6 +7,7 @@ use App\Models\Patients\Patient;
 use App\Models\Invoices\Encounter;
 use App\Models\Patients\Demographic;
 use App\Models\Invoices\Extras\Problem;
+use App\Models\Invoices\Extras\Miscellaneous;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class PatientSeeder extends Seeder
@@ -27,6 +28,7 @@ class PatientSeeder extends Seeder
                 ->create(['pid' => $patient->pid])
                 ->each(function ($invoice) {
                     Problem::factory()->create(['encounter' => $invoice->encounter]);
+                    Miscellaneous::factory()->create(['encounter' => $invoice->encounter]);
                 });
         });
     }

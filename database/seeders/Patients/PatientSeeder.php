@@ -5,6 +5,7 @@ namespace Database\Seeders\Patients;
 use Illuminate\Database\Seeder;
 use App\Models\Patients\Patient;
 use App\Models\Invoices\Encounter;
+use App\Models\Invoices\Extras\Lab;
 use App\Models\Patients\Demographic;
 use App\Models\Invoices\Extras\Problem;
 use App\Models\Invoices\Extras\Miscellaneous;
@@ -29,6 +30,7 @@ class PatientSeeder extends Seeder
                 ->each(function ($invoice) {
                     Problem::factory()->create(['encounter' => $invoice->encounter]);
                     Miscellaneous::factory()->create(['encounter' => $invoice->encounter]);
+                    Lab::factory()->create(['encounter' => $invoice->encounter]);
                 });
         });
     }

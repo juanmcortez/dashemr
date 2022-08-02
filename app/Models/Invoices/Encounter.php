@@ -3,6 +3,7 @@
 namespace App\Models\Invoices;
 
 use App\Models\Patients\Patient;
+use App\Models\Invoices\Extras\Lab;
 use App\Models\Patients\Demographic;
 use App\Models\Invoices\Extras\Problem;
 use Illuminate\Database\Eloquent\Model;
@@ -122,5 +123,16 @@ class Encounter extends Model
     public function miscellaneousTab()
     {
         return $this->hasOne(Miscellaneous::class, 'encounter', 'encounter');
+    }
+
+
+    /**
+     * Get lab information associated to encounter
+     *
+     * @return void
+     */
+    public function labTab()
+    {
+        return $this->hasOne(Lab::class, 'encounter', 'encounter');
     }
 }

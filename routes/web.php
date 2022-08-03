@@ -24,10 +24,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/patients/all', [DemographicController::class, 'index'])->name('patients.list');
-    Route::get('/patients/{patient}/ledger', [PatientController::class, 'show'])->name('patients.show');
+    Route::get('/patients/all', [DemographicController::class, 'index'])
+        ->name('patients.list');
+    Route::get('/patients/{patient}/ledger', [PatientController::class, 'show'])
+        ->name('patients.show');
 
-    Route::get('/patients/{patient}/encounters/{encounter}/detail', [EncounterController::class, 'show'])->name('encounter.detail');
+    Route::get('/patients/{patient}/encounters/{encounter}/detail', [EncounterController::class, 'show'])
+        ->name('encounter.detail');
 });
 
 Route::redirect('/', 'login');

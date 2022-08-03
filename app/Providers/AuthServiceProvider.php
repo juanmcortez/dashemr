@@ -20,6 +20,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\Invoices\Extras\Problem'        => 'App\Policies\Invoices\Extras\ProblemPolicy',
         'App\Models\Invoices\Extras\Miscellaneous'  => 'App\Policies\Invoices\Extras\MiscellaneousPolicy',
         'App\Models\Invoices\Extras\Lab'            => 'App\Policies\Invoices\Extras\LabPolicy',
+        'App\Models\Invoices\Charge'                => 'App\Policies\Invoices\ChargePolicy',
     ];
 
     /**

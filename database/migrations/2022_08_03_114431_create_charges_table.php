@@ -30,10 +30,6 @@ return new class extends Migration
             $table->string('modifier', 64)->nullable();
             $table->text('ICDitems')->nullable();
 
-            $table->string('NDCvalue', 32)->nullable();
-            $table->integer('NDCquantity')->nullable();
-            $table->enum('NDCtype', ['ML', 'Grams', 'Miligrams', 'I.U.', 'Units'])->default('ML');
-
             $table->text('noteCodes')->nullable();
 
             $table->string('custom1', 64)->nullable();

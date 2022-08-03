@@ -2,6 +2,7 @@
 
 namespace App\Models\Invoices;
 
+use App\Models\Invoices\Charge;
 use App\Models\Patients\Patient;
 use App\Models\Invoices\Extras\Lab;
 use App\Models\Patients\Demographic;
@@ -134,5 +135,16 @@ class Encounter extends Model
     public function labTab()
     {
         return $this->hasOne(Lab::class, 'encounter', 'encounter');
+    }
+
+
+    /**
+     * Get charge information associated to encounter
+     *
+     * @return void
+     */
+    public function chargesList()
+    {
+        return $this->hasMany(Charge::class, 'encounter', 'encounter');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders\Patients;
 
+use App\Models\Invoices\Charge;
 use Illuminate\Database\Seeder;
 use App\Models\Patients\Patient;
 use App\Models\Invoices\Encounter;
@@ -20,17 +21,25 @@ class PatientSeeder extends Seeder
      */
     public function run()
     {
+        // Create patients
         Patient::factory(1000)->create()->each(function ($patient) {
+            // For each patient create demographics
             Demographic::factory()
                 ->create(['pid' => $patient->pid]);
 
+            // For each patient create a random number of encounters
             $rnd = random_int(1, 6);
             Encounter::factory($rnd)
                 ->create(['pid' => $patient->pid])
                 ->each(function ($invoice) {
+                    // For each encounter create tabs
                     Problem::factory()->create(['encounter' => $invoice->encounter]);
                     Miscellaneous::factory()->create(['encounter' => $invoice->encounter]);
                     Lab::factory()->create(['encounter' => $invoice->encounter]);
+
+                    // For each encounter create a random number of charges
+                    $rnd = random_int(1, 12);
+                    Charge::factory($rnd)->create(['encounter' => $invoice->encounter]);
                 });
         });
     }

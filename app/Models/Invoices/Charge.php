@@ -3,6 +3,7 @@
 namespace App\Models\Invoices;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Invoices\Extras\Anesthesia;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -65,4 +66,15 @@ class Charge extends Model
      * @var array
      */
     protected $casts = [];
+
+
+    /**
+     * Get anesthesia information associated to charge
+     *
+     * @return void
+     */
+    public function anesthesiaInfo()
+    {
+        return $this->hasOne(Anesthesia::class, 'charge', 'charge');
+    }
 }

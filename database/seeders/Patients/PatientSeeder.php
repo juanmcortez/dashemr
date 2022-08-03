@@ -10,6 +10,7 @@ use App\Models\Invoices\Extras\Lab;
 use App\Models\Patients\Demographic;
 use App\Models\Invoices\Extras\Problem;
 use App\Models\Invoices\Extras\Anesthesia;
+use App\Models\Invoices\Extras\SpecialCode;
 use App\Models\Invoices\Extras\Miscellaneous;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -23,7 +24,7 @@ class PatientSeeder extends Seeder
     public function run()
     {
         // Create patients
-        Patient::factory(100)->create()->each(function ($patient) {
+        Patient::factory(1000)->create()->each(function ($patient) {
             // For each patient create demographics
             Demographic::factory()
                 ->create(['pid' => $patient->pid]);
@@ -47,6 +48,9 @@ class PatientSeeder extends Seeder
                             // If code is anesthesia, add relationship to charge
                             if ($chargeItem->codeType == 'ANES') {
                                 Anesthesia::factory()->create(['charge' => $chargeItem->charge]);
+                            } elseif ($chargeItem->codeType == 'HCPCS' || $chargeItem->codeType == 'CVX') {
+                                // If code is HCPCS or CVX, add relationship to charge
+                                SpecialCode::factory()->create(['charge' => $chargeItem->charge]);
                             }
                         });
                 });

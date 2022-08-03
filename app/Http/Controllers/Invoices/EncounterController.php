@@ -53,6 +53,7 @@ class EncounterController extends Controller
     {
         $patient->load('demographic');
         $encounter->load('problemTab', 'miscellaneousTab', 'labTab', 'chargesList');
+        $encounter->chargesList->load('anesthesiaInfo', 'specialCodeInfo');
         return Inertia::render('Invoices/Encounter', ['patient' => $patient, 'invoice' => $encounter]);
     }
 

@@ -3,6 +3,8 @@
 namespace App\Models\Invoices;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Invoices\Extras\Anesthesia;
+use App\Models\Invoices\Extras\SpecialCode;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -34,9 +36,6 @@ class Charge extends Model
         'units',
         'modifier',
         'ICDitems',
-        'NDCvalue',
-        'NDCquantity',
-        'NDCtype',
         'noteCodes',
         'custom1',
         'custom2',
@@ -65,4 +64,26 @@ class Charge extends Model
      * @var array
      */
     protected $casts = [];
+
+
+    /**
+     * Get anesthesia information associated to charge
+     *
+     * @return void
+     */
+    public function anesthesiaInfo()
+    {
+        return $this->hasOne(Anesthesia::class, 'charge', 'charge');
+    }
+
+
+    /**
+     * Get specialCode information associated to charge
+     *
+     * @return void
+     */
+    public function specialCodeInfo()
+    {
+        return $this->hasOne(SpecialCode::class, 'charge', 'charge');
+    }
 }

@@ -9,6 +9,8 @@ use App\Models\Invoices\Encounter;
 use App\Models\Invoices\Extras\Lab;
 use App\Models\Patients\Demographic;
 use App\Models\Invoices\Extras\Problem;
+use App\Models\Invoices\Extras\Anesthesia;
+use App\Models\Invoices\Extras\SpecialCode;
 use App\Models\Invoices\Extras\Miscellaneous;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -39,7 +41,18 @@ class PatientSeeder extends Seeder
 
                     // For each encounter create a random number of charges
                     $rnd = random_int(1, 12);
-                    Charge::factory($rnd)->create(['encounter' => $invoice->encounter]);
+                    Charge::factory($rnd)
+                        ->create(['encounter' => $invoice->encounter,])
+                        ->each(function ($chargeItem) {
+
+                            // If code is anesthesia, add relationship to charge
+                            if ($chargeItem->codeType == 'ANES') {
+                                Anesthesia::factory()->create(['charge' => $chargeItem->charge]);
+                            } elseif ($chargeItem->codeType == 'HCPCS' || $chargeItem->codeType == 'CVX') {
+                                // If code is HCPCS or CVX, add relationship to charge
+                                SpecialCode::factory()->create(['charge' => $chargeItem->charge]);
+                            }
+                        });
                 });
         });
     }

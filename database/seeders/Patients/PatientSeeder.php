@@ -43,6 +43,8 @@ class PatientSeeder extends Seeder
                     Charge::factory($rnd)
                         ->create(['encounter' => $invoice->encounter,])
                         ->each(function ($chargeItem) {
+
+                            // If code is anesthesia, add relationship to charge
                             if ($chargeItem->codeType == 'ANES') {
                                 Anesthesia::factory()->create(['charge' => $chargeItem->charge]);
                             }

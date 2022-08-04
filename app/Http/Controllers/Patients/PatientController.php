@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Patients;
 use Inertia\Inertia;
 use App\Models\Patients\Patient;
 use App\Http\Controllers\Controller;
+use App\Models\Patients\Demographic;
 use App\Http\Requests\Patients\StorePatientRequest;
 use App\Http\Requests\Patients\UpdatePatientRequest;
 
@@ -17,6 +18,17 @@ class PatientController extends Controller
      */
     public function index()
     {
+        // This line returns the paginated list of elements, with only selected columns in relationship
+        $patients = Patient::with('demographic:pid,firstName,middleName,lastName,dateOfBirth,socialSecurityNumber,homePhone')
+            ->orderBy(
+                Demographic::select('lastName')
+                    ->orderBy('lastName')
+                    ->orderBy('firstName')
+                    ->orderBy('middleName')
+                    ->whereColumn('demographics.pid', 'patients.pid')
+            )
+            ->paginate(100);
+        return Inertia::render('Patients/Table', ['patients' => $patients]);
     }
 
     /**

@@ -36,22 +36,25 @@ const props = defineProps({
                                 <tr>
                                     <th
                                         class="w-1/4 p-4 font-semibold text-center border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200">
-                                        Name</th>
+                                        Full Name</th>
                                     <th
                                         class="p-4 font-semibold text-center border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200">
-                                        Phone</th>
-                                    <th
-                                        class="p-4 font-semibold text-center border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200">
-                                        Date of Birth / Age</th>
+                                        Home Phone</th>
                                     <th
                                         class="p-4 font-semibold text-center border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200">
                                         SSN</th>
                                     <th
                                         class="p-4 font-semibold text-center border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200">
-                                        PID</th>
+                                        Date of Birth</th>
+                                    <th
+                                        class="p-4 font-semibold text-center border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200">
+                                        Accession #</th>
                                     <th
                                         class="p-4 font-semibold text-center border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200">
                                         External ID</th>
+                                    <th
+                                        class="p-4 font-semibold text-center border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200">
+                                        PID</th>
                                     <th
                                         class="p-4 font-semibold text-center border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200">
                                         &nbsp;</th>
@@ -61,31 +64,28 @@ const props = defineProps({
                                 <tr v-for="patient in patients.data" :key="patient.pid" class="text-center">
                                     <td
                                         class="p-4 text-left border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                        {{ patient.full_name }}</td>
+                                        {{ patient.demographic.full_name }}</td>
                                     <td
                                         class="p-4 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                        {{ patient.homePhone }}</td>
+                                        {{ patient.demographic.homePhone }}</td>
                                     <td
                                         class="p-4 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                        <table class="w-full">
-                                            <tr>
-                                                <td>{{ patient.dateOfBirth }}</td>
-                                                <td>{{ patient.age }}</td>
-                                            </tr>
-                                        </table>
-                                    </td>
+                                        {{ patient.demographic.socialSecurityNumber }}</td>
                                     <td
                                         class="p-4 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                        {{ patient.socialSecurityNumber }}</td>
+                                        {{ patient.demographic.dateOfBirth }}</td>
                                     <td
                                         class="p-4 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                        {{ patient.patient_info.pid }}</td>
+                                        &nbsp;</td>
                                     <td
                                         class="p-4 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                        {{ patient.patient_info.externalPid }}</td>
+                                        {{ patient.externalPid }}</td>
                                     <td
                                         class="p-4 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                                        <Link :href="route('patients.show', { patient: patient.patient_info.pid })">View
+                                        {{ patient.pid }}</td>
+                                    <td
+                                        class="p-4 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
+                                        <Link :href="route('patients.show', { patient: patient.pid })">View
                                         </Link>
                                     </td>
                                 </tr>

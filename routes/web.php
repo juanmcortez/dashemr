@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\Patients\PatientController;
 use App\Http\Controllers\Invoices\EncounterController;
-use App\Http\Controllers\Patients\DemographicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +23,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/patients/all', [DemographicController::class, 'index'])
+    Route::get('/patients', [PatientController::class, 'index'])
         ->name('patients.list');
     Route::get('/patients/{patient}/ledger', [PatientController::class, 'show'])
         ->name('patients.show');

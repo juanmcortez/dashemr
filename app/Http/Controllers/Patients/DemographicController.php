@@ -17,12 +17,6 @@ class DemographicController extends Controller
      */
     public function index()
     {
-        $patients = Demographic::with('patientInfo')
-            ->orderBy('lastName')
-            ->orderBy('firstName')
-            ->orderBy('middleName')
-            ->paginate(100);
-        return Inertia::render('Patients/List', ['patients' => $patients]);
     }
 
     /**

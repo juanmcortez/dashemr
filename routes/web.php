@@ -28,7 +28,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/patients/{patient}/ledger', [PatientController::class, 'show'])
         ->name('patients.show');
 
-    Route::get('/patients/{patient}/encounters/{encounter}/detail', [EncounterController::class, 'show'])
+    Route::get('/patients/encounters/{encounter}/detail', [EncounterController::class, 'show'])
         ->name('encounter.detail');
 });
 

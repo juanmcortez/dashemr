@@ -27,7 +27,9 @@ class Patient extends Model
      * @var array
      */
     protected $fillable = [
-        'externalPid'
+        'externalPid',
+        'latestServiceDate',
+        'accountLevelAccession',
     ];
 
 
@@ -48,8 +50,21 @@ class Patient extends Model
      * @var array
      */
     protected $casts = [
-        'created_at' => 'datetime:M d, Y',
+        'created_at'            => 'datetime:M d, Y',
+        'latestServiceDate'     => 'datetime:M d, Y',
     ];
+
+
+    /**
+     * Accesor: latestServiceDate.
+     *
+     * @param  date  $value
+     * @return string
+     */
+    public function getlatestServiceDateAttribute($value)
+    {
+        return (is_null($value)) ? '--' : $value;
+    }
 
 
     /**
@@ -59,7 +74,7 @@ class Patient extends Model
      */
     public function demographic()
     {
-        return $this->hasOne(Demographic::class, 'pid', 'pid');
+        return $this->hasOne(Demographic::class, 'pid', 'pid')->withDefault();
     }
 
 
@@ -70,6 +85,19 @@ class Patient extends Model
      */
     public function encounters()
     {
-        return $this->hasMany(Encounter::class, 'pid', 'pid');
+        return $this->hasMany(Encounter::class, 'pid', 'pid')
+            ->orderBy('serviceDate', 'desc')
+            ->orderBy('encounter', 'desc');
+    }
+
+
+    /**
+     * This function retrieves the information associated between encounters and charges
+     *
+     * @return void
+     */
+    public function encountersCharges()
+    {
+        return $this->encounters->load('chargesList');
     }
 }

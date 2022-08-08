@@ -5,7 +5,6 @@ namespace App\Models\Invoices;
 use App\Models\Invoices\Charge;
 use App\Models\Patients\Patient;
 use App\Models\Invoices\Extras\Lab;
-use App\Models\Patients\Demographic;
 use App\Models\Invoices\Extras\Problem;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Invoices\Extras\Miscellaneous;
@@ -84,24 +83,11 @@ class Encounter extends Model
 
 
     /**
-     * Get patient information associated to invoice
-     *
-     * @return void
+     * Get the patient that the encounter belongs to.
      */
-    public function patientInfo()
+    public function patient()
     {
-        return $this->belongsTo(Patient::class, 'pid', 'pid');
-    }
-
-
-    /**
-     * Get demographic information associated to invoice
-     *
-     * @return void
-     */
-    public function demographicInfo()
-    {
-        return $this->belongsTo(Demographic::class, 'pid', 'pid');
+        return $this->belongsTo(Patient::class, 'pid', 'pid')->with('demographic');
     }
 
 

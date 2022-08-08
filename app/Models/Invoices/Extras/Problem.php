@@ -12,6 +12,14 @@ class Problem extends Model
 
 
     /**
+     * The primary key associated with the table.
+     *
+     * @var string
+     */
+    protected $primaryKey = 'encounter';
+
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -36,7 +44,6 @@ class Problem extends Model
      * @var array
      */
     protected $hidden = [
-        'id',
         'encounter',
         'created_at',
         'updated_at',

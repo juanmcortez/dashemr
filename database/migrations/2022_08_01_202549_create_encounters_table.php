@@ -16,8 +16,7 @@ return new class extends Migration
         Schema::create('encounters', function (Blueprint $table) {
             $table->id('encounter');
 
-            $table->unsignedBigInteger('pid');
-            $table->foreign('pid')->references('pid')->on('patients');
+            $table->foreignId('pid')->constrained('patients', 'pid');
 
             $table->dateTime('entryDate')->default(now());
             $table->dateTime('serviceDate')->default(now());

@@ -14,10 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('labs', function (Blueprint $table) {
-            $table->id();
-
-            $table->unsignedBigInteger('encounter');
-            $table->foreign('encounter')->references('encounter')->on('encounters');
+            $table->foreignId('encounter')->constrained('encounters', 'encounter');
 
             $table->string('accessionNumberLabLevel', 64)->nullable();
             $table->string('salesRepresentative', 64)->nullable();

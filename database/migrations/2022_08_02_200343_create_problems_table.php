@@ -14,10 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('problems', function (Blueprint $table) {
-            $table->id();
-
-            $table->unsignedBigInteger('encounter');
-            $table->foreign('encounter')->references('encounter')->on('encounters');
+            $table->foreignId('encounter')->constrained('encounters', 'encounter');
 
             $table->dateTime('conditionOriginatedDate')->nullable();
             $table->dateTime('firstConsultedDate')->nullable();

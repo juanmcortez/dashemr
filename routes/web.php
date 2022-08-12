@@ -29,7 +29,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('patients.show');
 
     Route::get('/patients/encounters/{encounter}/detail', [EncounterController::class, 'show'])
-        ->name('encounter.detail');
+        ->name('patients.encounter.detail');
+
+    /** TEMP URLS **/
+    Route::redirect('/billing', '/dashboard')->name('billing');
+    Route::redirect('/payments', '/dashboard')->name('payments');
+    Route::redirect('/reports', '/dashboard')->name('reports');
+    Route::redirect('/practice/settings', '/dashboard')->name('practice.settings');
+    Route::redirect('/user/profile', '/dashboard')->name('user.profile');
+    /** TEMP URLS **/
 });
 
 Route::redirect('/', 'login');

@@ -1,9 +1,9 @@
 <script setup>
-import Layout from '@/Layouts/Authenticated.vue';
-import { Head } from '@inertiajs/inertia-vue3';
+import SiteHeader from '@/Components/dashemr/LayoutParts/SiteHeader.vue';
+import Layout from '@/Layouts/newDesign.vue';
 import LedgerHead from '@/Components/dashemr/Ledger/PatientInfo.vue';
 import EncounterDetails from '@/Components/dashemr/Invoices/EncounterDetail.vue';
-import EncounterCharges from '@/Components/dashemr/Invoices/ChargesTable.vue';
+import ChargesTable from '@/Components/dashemr/Invoices/ChargesTable.vue';
 const props = defineProps({
     invoice: {
         type: Object,
@@ -14,28 +14,21 @@ const props = defineProps({
 
 <template>
 
-    <Head>
-        <title>
-            {{ invoice.patient.demographic.full_name }}'s encounter
-            <em>#{{ invoice.patient.pid }}.{{ invoice.encounter }}</em>
-        </title>
-        <meta name="author" content="Juan M. Cortéz">
-        <meta name="description"
-            :content="invoice.patient.demographic.full_name + '\'s encounter #' + invoice.patient.pid + '.' + invoice.encounter">
-        <meta name="keywords" content="EMR, Health, Patients, Insurance, Payments, Dashboard">
-    </Head>
+    <SiteHeader
+        :title="invoice.patient.demographic.full_name + '\'s encounter #' + invoice.patient.pid + '.' + invoice.encounter"
+        :description="invoice.patient.demographic.full_name + '\'s encounter #' + invoice.patient.pid + '.' + invoice.encounter" />
+
     <Layout>
-        <template #header>
+        <template #PageHeader>
             <LedgerHead :patient="invoice.patient" />
         </template>
 
-        <div class="w-full p-10 text-sm">
+        <template #PageContent>
 
             <EncounterDetails :invoice="invoice" />
 
-            <EncounterCharges :invoice="invoice" />
+            <ChargesTable :charges="invoice.charges_list" />
 
-        </div>
+        </template>
     </Layout>
-
 </template>

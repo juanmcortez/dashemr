@@ -1,7 +1,6 @@
 <script setup>
-import { Link } from '@inertiajs/inertia-vue3';
 const props = defineProps({
-    invoice: {
+    charges: {
         type: Object,
         default: () => ({})
     },
@@ -9,19 +8,95 @@ const props = defineProps({
 </script>
 
 <template>
-    <table
-        class="w-full text-sm bg-white border border-collapse shadow-sm border-slate-400 dark:border-slate-500 dark:bg-slate-800">
-        <thead class="bg-slate-50 dark:bg-slate-700">
+    <table class="w-full text-sm border border-b-0 border-collapse shadow-sm bg-slate-200 border-slate-400">
+        <thead class="bg-slate-50">
             <tr>
-                <th
-                    class="p-4 font-semibold text-center border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200">
-                    Charges</th>
+                <th class="p-2 font-semibold text-center border border-b-0 border-slate-300 text-slate-900">Charges</th>
             </tr>
         </thead>
-        <tbody>
-            <tr v-for="charge in invoice.charges_list" :key="charge.charge">
-                <td class="p-4 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400">
-                    {{ charge }}</td>
+    </table>
+    <table v-for="(charge, idx) in charges" :key="charge.charge"
+        class="w-full mb-10 text-sm bg-white shadow-sm last-of-type:mb-0">
+        <tbody :class="['align-top', (idx % 2) ? 'bg-slate-100' : 'bg-slate-50']">
+            <!-- Details -->
+            <tr class="border border-slate-300 text-slate-500">
+                <td class="w-1/12 p-2 font-semibold text-right text-slate-700">Code</td>
+                <td colspan="3" class="w-3/12 p-2 pl-0 border-r border-slate-300">
+                    <span v-if="charge.codeType" class="mr-2 text-xs">
+                        [ {{ charge.codeType }} ]
+                    </span>
+                    {{ charge.code }}
+                </td>
+                <td class="w-1/12 p-2 font-semibold text-right text-slate-700">Fee</td>
+                <td class="w-1/12 p-2 pl-0 border-r border-slate-300">
+                    $ {{ charge.fee }}
+                </td>
+                <td class="w-1/12 p-2 font-semibold text-right text-slate-700">Copay</td>
+                <td class="w-1/12 p-2 pl-0 border-r border-slate-300">
+                    $ {{ charge.copay }}
+                </td>
+                <td class="w-1/12 p-2 font-semibold text-right text-slate-700">Insurance</td>
+                <td class="w-1/12 p-2 pl-0 border-r border-slate-300">
+                    $ {{ charge.fee - charge.copay }}
+                </td>
+                <td class="w-1/12 p-2 font-semibold text-right text-slate-700">Units</td>
+                <td class="w-1/12 p-2 pl-0">
+                    {{ charge.units }} un.
+                </td>
+            </tr>
+            <!-- Anesthesia -->
+            <tr v-if="charge.codeType == 'ANES'" class="border-2 border-x-slate-200 border-y-slate-200">
+                <td class="w-1/12 p-2 font-semibold text-right text-slate-700">ANES</td>
+                <td colspan="11" class="w-11/12 p-2 pl-0">&nbsp;</td>
+            </tr>
+            <!-- NDCs -->
+            <tr v-if="charge.codeType == 'HCPCS' || charge.codeType == 'CVX'"
+                class="border-2 border-x-slate-200 border-y-slate-200">
+                <td class="w-1/12 p-2 font-semibold text-right text-slate-700">NDC</td>
+                <td colspan="11" class="w-11/12 p-2 pl-0">&nbsp;</td>
+            </tr>
+            <!-- Mods -->
+            <tr class="border border-slate-300 text-slate-500">
+                <td class="w-1/12 p-2 font-semibold text-right text-slate-700">Modifiers</td>
+                <td colspan="3" class="w-3/12 p-2 pl-0 border-r border-slate-300">
+                    {{ charge.modifier }}
+                </td>
+                <td class="w-1/12 p-2 font-semibold text-right text-slate-700">Notes</td>
+                <td colspan="9" class="w-7/12 p-2 pl-0">
+                    {{ charge.noteCodes }}
+                </td>
+            </tr>
+            <!-- ICDs -->
+            <tr class="border border-slate-300 text-slate-500">
+                <td class="w-1/12 p-2 font-semibold text-right text-slate-700">ICD's</td>
+                <td colspan="11" class="w-11/12 p-2 pl-0">
+                    {{ charge.ICDitems }}
+                </td>
+            </tr>
+            <!-- Custom -->
+            <tr class="border border-slate-300 text-slate-500">
+                <td class="w-1/12 p-2 font-semibold text-right text-slate-700">Custom 1</td>
+                <td class="w-1/12 p-2 pl-0 border-r border-slate-300">
+                    {{ charge.custom1 }}
+                </td>
+                <td class="w-1/12 p-2 font-semibold text-right text-slate-700">Custom 2</td>
+                <td class="w-1/12 p-2 pl-0 border-r border-slate-300">
+                    {{ charge.custom1 }}
+                </td>
+                <td class="w-1/12 p-2 font-semibold text-right text-slate-700">Custom 3</td>
+                <td class="w-1/12 p-2 pl-0 border-r border-slate-300">
+                    {{ charge.custom1 }}
+                </td>
+                <td class="w-1/12 p-2 font-semibold text-right text-slate-700">Custom 4</td>
+                <td class="w-1/12 p-2 pl-0 border-r border-slate-300">
+                    {{ charge.custom1 }}
+                </td>
+                <td class="w-1/12 p-2 font-semibold text-right text-slate-700">Custom 5</td>
+                <td class="w-1/12 p-2 pl-0 border-r border-slate-300">
+                    {{ charge.custom1 }}
+                </td>
+                <td class="w-1/12 p-2 font-semibold text-right text-slate-700"></td>
+                <td class="w-1/12 p-2 pl-0"></td>
             </tr>
         </tbody>
     </table>

@@ -1,50 +1,19 @@
 <script setup>
+import BalanceTable from '@/Components/dashemr/Table.vue';
 const props = defineProps({
     totals: {
         type: Object,
-        default: () => ({})
+        default: () => ({
+            0: { 'balance': 'Invoice', 'total': '0.00', 'unbilled': '0.00', 'current': '0.00', '30days': '0.00', '60days': '0.00', '90days': '0.00', '120days': '0.00' },
+            1: { 'balance': 'Patient', 'total': '0.00', 'unbilled': '0.00', 'current': '0.00', '30days': '0.00', '60days': '0.00', '90days': '0.00', '120days': '0.00' },
+            2: { 'balance': 'Total', 'total': '0.00', 'unbilled': '0.00', 'current': '0.00', '30days': '0.00', '60days': '0.00', '90days': '0.00', '120days': '0.00' },
+        })
     },
 });
 </script>
 <template>
-    <div class="flex font-semibold text-center bg-white border-b-2 border-gray-300 justify-evenly">
-        <div class="flex-1 py-2">Balance</div>
-        <div class="flex-1 py-2">Total</div>
-        <div class="flex-1 py-2">Unbilled</div>
-        <div class="flex-1 py-2">Current</div>
-        <div class="flex-1 py-2">&gt;30 Days</div>
-        <div class="flex-1 py-2">&gt;60 Days</div>
-        <div class="flex-1 py-2">&gt;90 Days</div>
-        <div class="flex-1 py-2">&gt;120 Days</div>
-    </div>
-    <div class="flex text-center bg-white border-b border-gray-300 justify-evenly">
-        <div class="flex-1 py-2 font-semibold">Invoice</div>
-        <div class="flex-1 py-2">0.00</div>
-        <div class="flex-1 py-2">0.00</div>
-        <div class="flex-1 py-2">0.00</div>
-        <div class="flex-1 py-2">0.00</div>
-        <div class="flex-1 py-2">0.00</div>
-        <div class="flex-1 py-2">0.00</div>
-        <div class="flex-1 py-2">0.00</div>
-    </div>
-    <div class="flex text-center bg-white border-b border-gray-300 justify-evenly">
-        <div class="flex-1 py-2 font-semibold">Patient</div>
-        <div class="flex-1 py-2">0.00</div>
-        <div class="flex-1 py-2">0.00</div>
-        <div class="flex-1 py-2">0.00</div>
-        <div class="flex-1 py-2">0.00</div>
-        <div class="flex-1 py-2">0.00</div>
-        <div class="flex-1 py-2">0.00</div>
-        <div class="flex-1 py-2">0.00</div>
-    </div>
-    <div class="flex mb-10 text-center bg-white border-b border-gray-300 justify-evenly">
-        <div class="flex-1 py-2 font-semibold">Account</div>
-        <div class="flex-1 py-2">0.00</div>
-        <div class="flex-1 py-2">0.00</div>
-        <div class="flex-1 py-2">0.00</div>
-        <div class="flex-1 py-2">0.00</div>
-        <div class="flex-1 py-2">0.00</div>
-        <div class="flex-1 py-2">0.00</div>
-        <div class="flex-1 py-2">0.00</div>
-    </div>
+    <BalanceTable
+        :columns="['Balance', 'Total', 'Unbilled', 'Current', '&gt;30 Days', '&gt;60 Days', '&gt;90 Days', '&gt;120 Days']"
+        :colData="['balance', 'total', 'unbilled', 'current', '30days', '60days', '90days', '120days']"
+        :rowsData="totals" />
 </template>

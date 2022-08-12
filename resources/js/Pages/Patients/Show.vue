@@ -1,10 +1,15 @@
 <script setup>
-import Layout from '@/Layouts/Authenticated.vue';
-import { Head, Link } from '@inertiajs/inertia-vue3';
+import SiteHeader from '@/Components/dashemr/LayoutParts/SiteHeader.vue';
+import Layout from '@/Layouts/newDesign.vue';
 import LedgerHead from '@/Components/dashemr/Ledger/PatientInfo.vue';
 import LedgerAccount from '@/Components/dashemr/Ledger/AccountTotals.vue';
 import LedgerEncounters from '@/Components/dashemr/Ledger/EncountersTable.vue';
+
 const props = defineProps({
+    fullTitle: {
+        type: String,
+        default: "Patient's list"
+    },
     patient: {
         type: Object,
         default: () => ({})
@@ -14,21 +19,20 @@ const props = defineProps({
 
 <template>
 
-    <Head>
-        <title>{{ patient.demographic.full_name }}'s Ledger</title>
-        <meta name="author" content="Juan M. Cortéz">
-        <meta name="description" :content="patient.demographic.full_name + '\'s Ledger'">
-        <meta name="keywords" content="EMR, Health, Patients, Insurance, Payments, Dashboard">
-    </Head>
+    <SiteHeader :title="patient.demographic.full_name + '\'s Ledger'"
+        :description="patient.demographic.full_name + '\'s Ledger.'" />
+
     <Layout>
-        <template #header>
+        <template #PageHeader>
             <LedgerHead :patient="patient" />
         </template>
 
-        <div class="w-full p-10 text-sm">
-            <LedgerAccount />
-            <LedgerEncounters :patient="patient" />
-        </div>
-    </Layout>
+        <template #PageContent>
 
+            <LedgerAccount />
+
+            <LedgerEncounters :patient="patient" />
+
+        </template>
+    </Layout>
 </template>

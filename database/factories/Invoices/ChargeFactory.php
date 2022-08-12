@@ -22,7 +22,8 @@ class ChargeFactory extends Factory
             'codeType'  => fake()->randomElement(['CPT4', 'HCPCS', 'ANES', 'CVX']),
             'code'      => fake()->randomNumber(5),
             'codeText'  => fake()->realTextBetween(20, 60),
-            'fee'       => fake()->randomFloat(2, 10, 9999),
+            'fee'       => fake()->randomFloat(2, 10, 999),
+            'units'     => fake()->randomNumber(1),
         ];
     }
 }

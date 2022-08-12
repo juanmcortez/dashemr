@@ -63,7 +63,10 @@ class Charge extends Model
      *
      * @var array
      */
-    protected $casts = [];
+    protected $casts = [
+        'fee'   => 'decimal:2',
+        'copay' => 'decimal:2',
+    ];
 
 
     /**

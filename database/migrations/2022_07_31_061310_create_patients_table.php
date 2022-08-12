@@ -16,7 +16,9 @@ return new class extends Migration
         Schema::create('patients', function (Blueprint $table) {
             $table->id('pid');
 
-            $table->string('externalPid')->nullable();
+            $table->string('externalPid', 64)->nullable();
+            $table->dateTime('latestServiceDate')->nullable();
+            $table->string('accountLevelAccession', 64)->nullable();
 
             $table->timestamps();
             $table->softDeletes();

@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\Patients\PatientController;
 use App\Http\Controllers\Invoices\EncounterController;
-use App\Http\Controllers\Patients\DemographicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,13 +23,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/patients/all', [DemographicController::class, 'index'])
+    Route::get('/patients', [PatientController::class, 'index'])
         ->name('patients.list');
     Route::get('/patients/{patient}/ledger', [PatientController::class, 'show'])
         ->name('patients.show');
 
-    Route::get('/patients/{patient}/encounters/{encounter}/detail', [EncounterController::class, 'show'])
-        ->name('encounter.detail');
+    Route::get('/patients/encounters/{encounter}/detail', [EncounterController::class, 'show'])
+        ->name('patients.encounter.detail');
+
+    /** TEMP URLS **/
+    Route::redirect('/billing', '/dashboard')->name('billing');
+    Route::redirect('/payments', '/dashboard')->name('payments');
+    Route::redirect('/reports', '/dashboard')->name('reports');
+    Route::redirect('/practice/settings', '/dashboard')->name('practice.settings');
+    Route::redirect('/user/profile', '/dashboard')->name('user.profile');
+    /** TEMP URLS **/
 });
 
 Route::redirect('/', 'login');

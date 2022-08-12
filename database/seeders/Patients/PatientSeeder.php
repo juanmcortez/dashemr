@@ -30,30 +30,35 @@ class PatientSeeder extends Seeder
                 ->create(['pid' => $patient->pid]);
 
             // For each patient create a random number of encounters
-            $rnd = random_int(1, 6);
-            Encounter::factory($rnd)
-                ->create(['pid' => $patient->pid])
-                ->each(function ($invoice) {
-                    // For each encounter create tabs
-                    Problem::factory()->create(['encounter' => $invoice->encounter]);
-                    Miscellaneous::factory()->create(['encounter' => $invoice->encounter]);
-                    Lab::factory()->create(['encounter' => $invoice->encounter]);
+            $rnd = random_int(0, 6);
+            if ($rnd) {
+                Encounter::factory($rnd)
+                    ->create(['pid' => $patient->pid])
+                    ->each(function ($invoice) {
+                        // For each new encounter update the patient latest service date
+                        $invoice->patient->touch('latestServiceDate');
 
-                    // For each encounter create a random number of charges
-                    $rnd = random_int(1, 12);
-                    Charge::factory($rnd)
-                        ->create(['encounter' => $invoice->encounter,])
-                        ->each(function ($chargeItem) {
+                        // For each encounter create tabs
+                        Problem::factory()->create(['encounter' => $invoice->encounter]);
+                        Miscellaneous::factory()->create(['encounter' => $invoice->encounter]);
+                        Lab::factory()->create(['encounter' => $invoice->encounter]);
 
-                            // If code is anesthesia, add relationship to charge
-                            if ($chargeItem->codeType == 'ANES') {
-                                Anesthesia::factory()->create(['charge' => $chargeItem->charge]);
-                            } elseif ($chargeItem->codeType == 'HCPCS' || $chargeItem->codeType == 'CVX') {
-                                // If code is HCPCS or CVX, add relationship to charge
-                                SpecialCode::factory()->create(['charge' => $chargeItem->charge]);
-                            }
-                        });
-                });
+                        // For each encounter create a random number of charges
+                        $rnd = random_int(1, 12);
+                        Charge::factory($rnd)
+                            ->create(['encounter' => $invoice->encounter,])
+                            ->each(function ($chargeItem) {
+
+                                // If code is anesthesia, add relationship to charge
+                                if ($chargeItem->codeType == 'ANES') {
+                                    Anesthesia::factory()->create(['charge' => $chargeItem->charge]);
+                                } elseif ($chargeItem->codeType == 'HCPCS' || $chargeItem->codeType == 'CVX') {
+                                    // If code is HCPCS or CVX, add relationship to charge
+                                    SpecialCode::factory()->create(['charge' => $chargeItem->charge]);
+                                }
+                            });
+                    });
+            }
         });
     }
 }

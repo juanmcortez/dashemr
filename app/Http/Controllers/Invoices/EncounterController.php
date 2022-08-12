@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Invoices;
 
 use Inertia\Inertia;
-use App\Models\Patients\Patient;
 use App\Models\Invoices\Encounter;
 use App\Http\Controllers\Controller;
-use App\Models\Patients\Demographic;
 use App\Http\Requests\Invoices\StoreEncounterRequest;
 use App\Http\Requests\Invoices\UpdateEncounterRequest;
 
@@ -49,12 +47,11 @@ class EncounterController extends Controller
      * @param  \App\Models\Invoices\Encounter  $encounter
      * @return \Illuminate\Http\Response
      */
-    public function show(Patient $patient, Encounter $encounter)
+    public function show(Encounter $encounter)
     {
-        $patient->load('demographic');
-        $encounter->load('problemTab', 'miscellaneousTab', 'labTab', 'chargesList');
-        $encounter->chargesList->load('anesthesiaInfo', 'specialCodeInfo');
-        return Inertia::render('Invoices/Encounter', ['patient' => $patient, 'invoice' => $encounter]);
+        return Inertia::render('Invoices/Show', [
+            'invoice' => $encounter->load('patient', 'problemTab', 'miscellaneousTab', 'labTab', 'chargesList')
+        ]);
     }
 
     /**

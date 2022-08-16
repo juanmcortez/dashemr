@@ -23,8 +23,8 @@ return new class extends Migration
             $table->string('code', 8)->default('99213');
             $table->string('codeText', 128)->nullable();
 
-            $table->decimal('fee', 6, 2)->default(0);
-            $table->decimal('copay', 6, 2)->default(0);
+            $table->decimal('fee', 8, 2)->default(0);
+            $table->decimal('copay', 8, 2)->default(0);
             $table->integer('units')->default(1);
 
             $table->string('modifier', 64)->nullable();

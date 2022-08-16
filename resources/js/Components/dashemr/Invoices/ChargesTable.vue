@@ -37,7 +37,7 @@ const props = defineProps({
                 </td>
                 <td class="w-1/12 p-2 font-semibold text-right text-slate-700">Insurance</td>
                 <td class="w-1/12 p-2 pl-0 border-r border-slate-300">
-                    $ {{ charge.fee - charge.copay }}
+                    $ {{ (charge.fee - charge.copay).toFixed(2) }}
                 </td>
                 <td class="w-1/12 p-2 font-semibold text-right text-slate-700">Units</td>
                 <td class="w-1/12 p-2 pl-0">
@@ -47,13 +47,17 @@ const props = defineProps({
             <!-- Anesthesia -->
             <tr v-if="charge.codeType == 'ANES'" class="border-2 border-x-slate-200 border-y-slate-200">
                 <td class="w-1/12 p-2 font-semibold text-right text-slate-700">ANES</td>
-                <td colspan="11" class="w-11/12 p-2 pl-0">&nbsp;</td>
+                <td colspan="11" class="w-11/12 p-2 pl-0">
+                    {{ charge.anesthesia_info }}
+                </td>
             </tr>
             <!-- NDCs -->
             <tr v-if="charge.codeType == 'HCPCS' || charge.codeType == 'CVX'"
                 class="border-2 border-x-slate-200 border-y-slate-200">
                 <td class="w-1/12 p-2 font-semibold text-right text-slate-700">NDC</td>
-                <td colspan="11" class="w-11/12 p-2 pl-0">&nbsp;</td>
+                <td colspan="11" class="w-11/12 p-2 pl-0 text-slate-500">
+                    {{ charge.special_code_info.NDCvalue }}
+                </td>
             </tr>
             <!-- Mods -->
             <tr class="border border-slate-300 text-slate-500">

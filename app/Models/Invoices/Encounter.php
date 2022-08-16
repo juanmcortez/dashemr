@@ -131,6 +131,6 @@ class Encounter extends Model
      */
     public function chargesList()
     {
-        return $this->hasMany(Charge::class, 'encounter', 'encounter');
+        return $this->hasMany(Charge::class, 'encounter', 'encounter')->with('anesthesiaInfo', 'specialCodeInfo');
     }
 }

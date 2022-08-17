@@ -97,7 +97,25 @@ class Encounter extends Model
      */
     public function referringDoctor()
     {
-        return $this->hasOne(Referring::class, 'id', 'referringProviderID');
+        return $this->hasOne(Referring::class, 'id', 'referringProviderID')->withDefault();
+    }
+
+
+    /**
+     * Get the Ordering Doctor that the encounter belongs to.
+     */
+    public function orderingDoctor()
+    {
+        return $this->hasOne(Referring::class, 'id', 'orderingProviderID')->withDefault();
+    }
+
+
+    /**
+     * Get the Supervising Doctor that the encounter belongs to.
+     */
+    public function supervisingDoctor()
+    {
+        return $this->hasOne(Referring::class, 'id', 'supervisingProviderID')->withDefault();
     }
 
 

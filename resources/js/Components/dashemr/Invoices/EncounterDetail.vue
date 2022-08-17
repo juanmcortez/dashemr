@@ -124,10 +124,10 @@ const props = defineProps({
                     {{ invoice.referring_doctor.doctor_full_name }}
                 </td>
                 <td class="p-2 text-center border border-slate-300 text-slate-500">
-                    {{ invoice.orderingProviderID }}
+                    {{ invoice.ordering_doctor.doctor_full_name }}
                 </td>
                 <td class="p-2 text-center border border-slate-300 text-slate-500">
-                    {{ invoice.supervisingProviderID }}
+                    {{ invoice.supervising_doctor.doctor_full_name }}
                 </td>
             </tr>
         </tbody>

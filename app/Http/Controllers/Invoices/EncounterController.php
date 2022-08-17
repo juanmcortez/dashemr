@@ -50,7 +50,7 @@ class EncounterController extends Controller
     public function show(Encounter $encounter)
     {
         return Inertia::render('Invoices/Show', [
-            'invoice' => $encounter->load('patient', 'referringDoctor', 'problemTab', 'miscellaneousTab', 'labTab', 'chargesList')
+            'invoice' => $encounter->load('patient', 'referringDoctor', 'orderingDoctor', 'supervisingDoctor', 'problemTab', 'miscellaneousTab', 'labTab', 'chargesList')
         ]);
     }
 

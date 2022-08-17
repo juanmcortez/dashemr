@@ -116,7 +116,11 @@ class Referring extends Model
         if ($this->middleName) {
             return Str::ucfirst(Str::lower($this->lastName)) . ', ' . Str::ucfirst(Str::lower($this->firstName)) . ' ' . Str::ucfirst(Str::lower($this->middleName));
         } else {
-            return Str::ucfirst(Str::lower($this->lastName)) . ', ' . Str::ucfirst(Str::lower($this->firstName));
+            if ($this->lastName && $this->firstName) {
+                return Str::ucfirst(Str::lower($this->lastName)) . ', ' . Str::ucfirst(Str::lower($this->firstName));
+            } else {
+                return '';
+            }
         }
     }
 }

@@ -9,6 +9,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class UserSeeder extends Seeder
 {
+    use WithoutModelEvents;
+
     /**
      * Run the database seeds.
      *
@@ -16,6 +18,9 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $this->command->line('         <bg=cyan;fg=white> PROC </> Creating user details.');
+        $this->command->newLine();
+
         User::factory()->create([
             'username'          => 'juanmcortez',
             'firstName'         => 'Juan',
@@ -26,5 +31,8 @@ class UserSeeder extends Seeder
             'password'          => '$2y$10$BXXW4PjUEvXH5.7LEoWfRuvjE5SnGSY8qCR.QHYAzdrUCoMjdysyS', // 123456789
             'remember_token'    => Str::random(10),
         ]);
+
+        $this->command->line('         <bg=green;fg=white> DONE </> Creating user details.');
+        $this->command->newLine();
     }
 }

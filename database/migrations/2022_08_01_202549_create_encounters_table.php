@@ -38,6 +38,7 @@ return new class extends Migration
             $table->longText('consult')->nullable();
             $table->unsignedBigInteger('authorizationNumberID')->nullable();
 
+            $table->dateTime('updated_at')->default(now());
             $table->softDeletes();
         });
     }

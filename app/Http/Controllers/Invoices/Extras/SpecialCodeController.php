@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Invoices\Extras;
 
+use App\Http\Controllers\Controller;
 use App\Models\Invoices\Extras\SpecialCode;
 use App\Http\Requests\Invoices\Extras\StoreSpecialCodeRequest;
 use App\Http\Requests\Invoices\Extras\UpdateSpecialCodeRequest;

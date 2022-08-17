@@ -16,6 +16,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class PatientSeeder extends Seeder
 {
+    use WithoutModelEvents;
+
     /**
      * Run the database seeds.
      *
@@ -24,7 +26,11 @@ class PatientSeeder extends Seeder
     public function run()
     {
         // Create patients
-        Patient::factory(1000)->create()->each(function ($patient) {
+        $totPatients = 1000;
+        $this->command->line('Creating ' . $totPatients . ' patients.');
+        // $this->command->newLine();
+
+        Patient::factory($totPatients)->create()->each(function ($patient) {
             // For each patient create demographics
             Demographic::factory()
                 ->create(['pid' => $patient->pid]);
@@ -32,6 +38,8 @@ class PatientSeeder extends Seeder
             // For each patient create a random number of encounters
             $rnd = random_int(0, 6);
             if ($rnd) {
+                // $this->command->info('Creating patient\'s encounters.');
+                // $this->command->newLine();
                 Encounter::factory($rnd)
                     ->create(['pid' => $patient->pid])
                     ->each(function ($invoice) {
@@ -45,6 +53,8 @@ class PatientSeeder extends Seeder
 
                         // For each encounter create a random number of charges
                         $rnd = random_int(1, 12);
+                        //$this->command->info('Creating encounter\'s charges.');
+                        //$this->command->newLine();
                         Charge::factory($rnd)
                             ->create(['encounter' => $invoice->encounter,])
                             ->each(function ($chargeItem) {
@@ -57,8 +67,15 @@ class PatientSeeder extends Seeder
                                     SpecialCode::factory()->create(['charge' => $chargeItem->charge]);
                                 }
                             });
+                        // $this->command->comment('Creating encounter\'s charges, DONE!');
+                        // $this->command->newLine();
                     });
+                // $this->command->comment('Creating patient\'s encounters, DONE!');
+                // $this->command->newLine();
             }
         });
+
+        $this->command->info('Creating ' . $totPatients . ' patients, DONE!');
+        $this->command->newLine();
     }
 }

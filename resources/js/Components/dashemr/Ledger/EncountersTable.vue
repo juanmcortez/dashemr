@@ -49,7 +49,7 @@ const props = defineProps({
                 <td colspan="10" class="text-center border border-slate-300 text-slate-900">
                     <table class="w-full text-sm">
                         <tbody>
-                            <tr v-for="(item, kdx) in invoice.charges_list" :key="item.charge">
+                            <tr v-for="(item, kdx) in invoice.charges_list" :key="item.charge" class="align-top">
                                 <td class="w-32 p-2 text-center border-r border-slate-300 text-slate-900">
                                     {{ item.code }}
                                 </td>
@@ -57,7 +57,7 @@ const props = defineProps({
                                     {{ item.modifier }}
                                 </td>
                                 <td class="w-32 p-2 text-center border-r border-slate-300 text-slate-900">
-                                    {{ item.ICDitems }}
+                                    {{ item.ICDitems.split(':') }}
                                 </td>
                                 <td class="p-2 text-center border-r w-14 border-slate-300 text-slate-900">
                                     {{ item.units }}
@@ -70,7 +70,7 @@ const props = defineProps({
                                 <td class="p-2 text-center border-r w-28 border-slate-300 text-slate-900">$ 0.00</td>
                                 <td class="p-2 text-center border-r w-28 border-slate-300 text-slate-900">$ 0.00</td>
                                 <td class="p-2 text-center text-slate-900">
-                                    $ {{ item.fee }}
+                                    $ {{ (item.fee - 0 - 0 - 0 - 0).toFixed(2) }}
                                 </td>
                             </tr>
                         </tbody>

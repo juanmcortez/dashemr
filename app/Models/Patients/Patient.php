@@ -2,6 +2,7 @@
 
 namespace App\Models\Patients;
 
+use App\Models\Doctors\Rendering;
 use App\Models\Invoices\Encounter;
 use App\Models\Patients\Demographic;
 use Illuminate\Database\Eloquent\Model;
@@ -98,6 +99,6 @@ class Patient extends Model
      */
     public function encountersCharges()
     {
-        return $this->encounters->load('chargesList');
+        return [$this->encounters->load('renderingDoctor'), $this->encounters->load('chargesList')];
     }
 }

@@ -4,6 +4,8 @@ namespace App\Models\Invoices;
 
 use App\Models\Invoices\Charge;
 use App\Models\Patients\Patient;
+use App\Models\Doctors\Referring;
+use App\Models\Doctors\Rendering;
 use App\Models\Invoices\Extras\Lab;
 use App\Models\Invoices\Extras\Problem;
 use Illuminate\Database\Eloquent\Model;
@@ -88,6 +90,42 @@ class Encounter extends Model
     public function patient()
     {
         return $this->belongsTo(Patient::class, 'pid', 'pid')->with('demographic');
+    }
+
+
+    /**
+     * Get the Rendering Doctor that the encounter belongs to.
+     */
+    public function renderingDoctor()
+    {
+        return $this->hasOne(Rendering::class, 'id', 'renderingProviderID')->withDefault();
+    }
+
+
+    /**
+     * Get the Referring Doctor that the encounter belongs to.
+     */
+    public function referringDoctor()
+    {
+        return $this->hasOne(Referring::class, 'id', 'referringProviderID')->withDefault();
+    }
+
+
+    /**
+     * Get the Ordering Doctor that the encounter belongs to.
+     */
+    public function orderingDoctor()
+    {
+        return $this->hasOne(Referring::class, 'id', 'orderingProviderID')->withDefault();
+    }
+
+
+    /**
+     * Get the Supervising Doctor that the encounter belongs to.
+     */
+    public function supervisingDoctor()
+    {
+        return $this->hasOne(Referring::class, 'id', 'supervisingProviderID')->withDefault();
     }
 
 

@@ -70,6 +70,33 @@ class Charge extends Model
 
 
     /**
+     * Accesor: Dynamic attribute.
+     *
+     * @var array
+     */
+    protected $appends = ['icd_items_list'];
+
+
+    /**
+     * Accesor: ICD Items List.
+     *
+     * @return string
+     */
+    public function getIcdItemsListAttribute()
+    {
+        $ICDList = explode(':', $this->ICDitems);
+        $returnList = '';
+        foreach ($ICDList as $idx => $ICD) {
+            if (!empty($ICD)) {
+                $items = explode('|', $ICD);
+                $returnList .= $items[1] . " - ";
+            }
+        }
+        return substr($returnList, 0, -3);
+    }
+
+
+    /**
      * Get anesthesia information associated to charge
      *
      * @return void

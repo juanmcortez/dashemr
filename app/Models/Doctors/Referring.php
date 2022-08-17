@@ -1,24 +1,15 @@
 <?php
 
-namespace App\Models\Patients;
+namespace App\Models\Doctors;
 
 use Illuminate\Support\Str;
-use App\Models\Patients\Patient;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Demographic extends Model
+class Referring extends Model
 {
     use HasFactory, SoftDeletes;
-
-
-    /**
-     * The primary key associated with the table.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'pid';
 
 
     /**
@@ -27,30 +18,45 @@ class Demographic extends Model
      * @var array
      */
     protected $fillable = [
-        'pid',
         'title',
         'firstName',
         'middleName',
         'lastName',
-        'dateOfBirth',
-        'genre',
-        'socialSecurityNumber',
-        'driverLicenseNumber',
+        'authorized',
+        'npi',
+        'upin',
+        'claimAs',
+        'taxonomy',
+        'stateLicenseNumber',
+        'federalTaxID',
+        'federalDrugID',
+        'specialty',
+        'billName',
+        'info',
+        'notes',
+        'assistant',
+        'organization',
+        'valedictory',
         'street',
         'streetExtended',
         'city',
         'state',
         'zip',
         'country',
-        'homePhone',
-        'cellPhone',
-        'emailAddress',
-        'civilStatus',
-        'language',
-        'ethnicity',
-        'race',
-        'dateDeceased',
-        'reasonDeceased',
+        'street2',
+        'streetExtended2',
+        'city2',
+        'state2',
+        'zip2',
+        'country2',
+        'email',
+        'website',
+        'phone',
+        'cellphone',
+        'fax',
+        'workPhone1',
+        'workPhone2',
+        'facilityID',
     ];
 
 
@@ -60,8 +66,21 @@ class Demographic extends Model
      * @var array
      */
     protected $hidden = [
-        'pid',
-        'created_at',
+        'id',
+        'title',
+        'authorized',
+        'upin',
+        'taxonomy',
+        'stateLicenseNumber',
+        'federalTaxID',
+        'federalDrugID',
+        'billName',
+        'info',
+        'notes',
+        'assistant',
+        'valedictory',
+        'website',
+        'facilityID',
         'updated_at',
         'deleted_at',
     ];
@@ -73,8 +92,8 @@ class Demographic extends Model
      * @var array
      */
     protected $casts = [
-        'dateOfBirth' => 'datetime:M d, Y',
-        'dateDeceased' => 'datetime:M d, Y',
+        'created_at'    => 'datetime:M d, Y',
+        'authorized'    => 'boolean',
     ];
 
 
@@ -83,31 +102,7 @@ class Demographic extends Model
      *
      * @var array
      */
-    protected $appends = ['age', 'full_name'];
-
-
-    /**
-     * Accesor: Genre.
-     *
-     * @param  string  $value
-     * @return string
-     */
-    public function getGenreAttribute($value)
-    {
-        return ucfirst($value);
-    }
-
-
-    /**
-     * Accesor: Age.
-     * Dynamically added.
-     *
-     * @return integer
-     */
-    public function getAgeAttribute()
-    {
-        return date_diff(now(), $this->dateOfBirth)->y;
-    }
+    protected $appends = ['doctor_full_name'];
 
 
     /**
@@ -116,7 +111,7 @@ class Demographic extends Model
      *
      * @return integer
      */
-    public function getFullNameAttribute()
+    public function getDoctorFullNameAttribute()
     {
         if ($this->middleName) {
             return Str::ucfirst(Str::lower($this->lastName)) . ', ' . Str::ucfirst(Str::lower($this->firstName)) . ' ' . Str::ucfirst(Str::lower($this->middleName));
@@ -127,16 +122,5 @@ class Demographic extends Model
                 return '';
             }
         }
-    }
-
-
-    /**
-     * Get patient information associated to demographic
-     *
-     * @return void
-     */
-    public function patientInfo()
-    {
-        return $this->belongsTo(Patient::class, 'pid', 'pid');
     }
 }

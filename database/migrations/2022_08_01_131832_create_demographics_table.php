@@ -19,9 +19,9 @@ return new class extends Migration
 
             $table->enum('title', ['unassigned', 'mr', 'mrs', 'Mrs.', 'ms', 'dr', 'other', ''])->nullable();
 
-            $table->string('firstName')->default('N');
-            $table->string('middleName')->nullable();
-            $table->string('lastName')->default('N');
+            $table->string('firstName', 64)->default('N');
+            $table->string('middleName', 64)->nullable();
+            $table->string('lastName', 64)->default('N');
 
             $table->date('dateOfBirth')->default(now());
             $table->enum('genre', ['male', 'female', 'undisclosed', 'other'])->default('undisclosed');

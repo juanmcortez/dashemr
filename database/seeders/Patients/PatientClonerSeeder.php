@@ -32,7 +32,7 @@ class PatientClonerSeeder extends Seeder
     public function run()
     {
         // Total chunk size
-        $chunkItems = 1000;
+        $chunkItems = 500;
         $dbname = config('database.connections.OriginalDatabase.database');
 
         // $this->command->line('Cloning: ' . $dbname);
@@ -169,7 +169,7 @@ class PatientClonerSeeder extends Seeder
                 'autoAccidentState'         => $extraData[1][7],
                 'accidentDate'              => (empty($extraData[1][8])) ? null : date('Y-m-d', strtotime($extraData[1][8])),
                 'employmentRelated'         => (empty($extraData[1][9]) || $extraData[1][9] == 'off') ? false : true,
-                'created_at'                => $encounterInfo->date,
+                'created_at'                => $encounterInfo->updated_at,
                 'updated_at'                => $encounterInfo->updated_at,
             ];
 
@@ -191,7 +191,7 @@ class PatientClonerSeeder extends Seeder
                 'condition1'                    => $extraData[2][15],
                 'condition2'                    => $extraData[2][16],
                 'condition3'                    => $extraData[2][17],
-                'created_at'                    => $encounterInfo->date,
+                'created_at'                    => $encounterInfo->updated_at,
                 'updated_at'                    => $encounterInfo->updated_at,
             ];
 
@@ -205,7 +205,7 @@ class PatientClonerSeeder extends Seeder
                 'referenceLab'              => $extraData[3][6],
                 'panelName'                 => $extraData[3][7],
                 'labTestType'               => $extraData[3][8],
-                'created_at'                => $encounterInfo->date,
+                'created_at'                => $encounterInfo->updated_at,
                 'updated_at'                => $encounterInfo->updated_at,
             ];
 

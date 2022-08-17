@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('lastName', 64)->default('N');
 
             $table->date('dateOfBirth')->default(now());
-            $table->enum('genre', ['male', 'female', 'undisclosed', 'other'])->default('undisclosed');
+            $table->enum('genre', ['male', 'female', 'undisclosed', 'other', ''])->default('undisclosed');
 
             $table->string('socialSecurityNumber')->nullable();
             $table->string('driverLicenseNumber')->nullable();

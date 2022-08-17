@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('federalTaxID', 16)->nullable();
             $table->string('federalDrugID', 16)->nullable();
 
-            $table->string('specialty', 64)->nullable();
+            $table->string('specialty', 128)->nullable();
             $table->string('billName', 64)->nullable();
             $table->mediumText('info')->nullable();
             $table->mediumText('notes')->nullable();

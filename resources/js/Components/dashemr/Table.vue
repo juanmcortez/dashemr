@@ -45,7 +45,7 @@ function isEmpty(checkArr) {
         </thead>
         <tbody v-if="isEmpty(rowsURL) === false">
             <Link v-for="(row, jdx) in rowsData" :key="jdx" :href="route(rowsURL[1], row[rowsURL[0]])"
-                class="table-row cursor-pointer">
+                :class="['table-row cursor-pointer', (jdx % 2) ? 'bg-zinc-50 hover:bg-zinc-200' : 'bg-zinc-100 hover:bg-zinc-200']">
             <td v-for="(column, kdx) in colData" :key="kdx"
                 :class="['p-2 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400', (kdx == 0 ? 'text-left' : 'text-center')]">
                 {{ getDataFromIndex(column, row) }}

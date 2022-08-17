@@ -74,7 +74,7 @@ const props = defineProps({
             <tr class="border border-slate-300 text-slate-500">
                 <td class="w-1/12 p-2 font-semibold text-right text-slate-700">ICD's</td>
                 <td colspan="11" class="w-11/12 p-2 pl-0">
-                    {{ charge.ICDitems }}
+                    {{ charge.icd_items_list }}
                 </td>
             </tr>
             <!-- Custom -->

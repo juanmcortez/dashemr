@@ -3,6 +3,7 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
+use App\Http\Controllers\Users\UserController;
 use App\Http\Controllers\Patients\PatientController;
 use App\Http\Controllers\Invoices\EncounterController;
 
@@ -36,8 +37,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::redirect('/payments', '/dashboard')->name('payments');
     Route::redirect('/reports', '/dashboard')->name('reports');
     Route::redirect('/practice/settings', '/dashboard')->name('practice.settings');
-    Route::redirect('/user/profile', '/dashboard')->name('user.profile');
     /** TEMP URLS **/
+
+    Route::get('/user/profile', [UserController::class, 'index'])
+        ->name('user.profile');
 });
 
 Route::redirect('/', 'login');

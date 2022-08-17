@@ -118,7 +118,7 @@ const props = defineProps({
                     {{ invoice.dischargeDate }}
                 </td>
                 <td class="p-2 text-center border border-slate-300 text-slate-500">
-                    {{ invoice.renderingProviderID }}
+                    {{ invoice.rendering_doctor.full_name }}
                 </td>
                 <td class="p-2 text-center border border-slate-300 text-slate-500">
                     {{ invoice.referring_doctor.doctor_full_name }}

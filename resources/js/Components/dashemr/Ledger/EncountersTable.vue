@@ -44,7 +44,9 @@ const props = defineProps({
                     {{ invoice.serviceDate }}
                 </td>
                 <td class="p-2 text-center border border-slate-300 text-slate-900">
-                    {{ invoice.referringProviderID }}
+                    <abbr class="hover:cursor-help" :title="invoice.rendering_doctor.display_name">
+                        {{ invoice.rendering_doctor.abbreviation }}
+                    </abbr>
                 </td>
                 <td colspan="10" class="text-center border border-slate-300 text-slate-900">
                     <table class="w-full text-sm">

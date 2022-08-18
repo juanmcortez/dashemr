@@ -43,10 +43,10 @@ const props = defineProps({
                     {{ invoice.serviceDateTo }}
                 </td>
                 <td class="p-2 text-center border border-slate-300 text-slate-500">
-                    {{ invoice.facilityID }}
+                    {{ (invoice.service_facility.fillingAs == 'group') ? invoice.service_facility.groupName : '' }}
                 </td>
                 <td class="p-2 text-center border border-slate-300 text-slate-500">
-                    {{ invoice.billingFacilityID }}
+                    {{ (invoice.billing_facility.fillingAs == 'group') ? invoice.billing_facility.groupName : '' }}
                 </td>
                 <td class="p-2 text-center border border-slate-300 text-slate-500">
                     {{ invoice.placeOfServiceID }}

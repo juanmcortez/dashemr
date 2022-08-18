@@ -9,6 +9,7 @@ use App\Models\Patients\Patient;
 use App\Models\Doctors\Referring;
 use App\Models\Doctors\Rendering;
 use App\Models\Invoices\Encounter;
+use App\Models\Locations\Facility;
 use Illuminate\Support\Facades\DB;
 use App\Models\Invoices\Extras\Lab;
 use App\Models\Patients\Demographic;
@@ -94,6 +95,184 @@ class PatientClonerSeeder extends Seeder
         }
 
         $this->command->line('         <bg=green;fg=white> DONE </> Copying patient details.');
+        $this->command->newLine();
+
+        $this->command->line('         <bg=cyan;fg=white> PROC </> Copying referring doctors details.');
+        $this->command->newLine();
+
+        // Connect to the original database and retrieve information.
+        $refDoctorsData = DB::connection('OriginalDatabase')->select('SELECT * FROM users WHERE username = "" AND fname != "Unknown" AND authorized = 0');
+
+        $doctorList = [];
+        foreach ($refDoctorsData as $doctor) {
+            $doctorList[] = [
+                'id'                    => $doctor->id,
+                'title'                 => $doctor->title,
+                'firstName'             => Str::ucfirst(Str::lower($doctor->fname)),
+                'middleName'            => Str::ucfirst(Str::lower($doctor->mname)),
+                'lastName'              => Str::ucfirst(Str::lower($doctor->lname)),
+                'authorized'            => $doctor->authorized,
+                'npi'                   => $doctor->npi,
+                'upin'                  => $doctor->upin,
+                'claimAs'               => $doctor->claim_as,
+                'taxonomy'              => $doctor->taxonomy,
+                'stateLicenseNumber'    => $doctor->state_license_number,
+                'federalTaxID'          => $doctor->federaltaxid,
+                'federalDrugID'         => $doctor->federaldrugid,
+                'specialty'             => $doctor->specialty,
+                'billName'              => $doctor->billname,
+                'info'                  => $doctor->info,
+                'notes'                 => $doctor->notes,
+                'assistant'             => $doctor->assistant,
+                'organization'          => $doctor->organization,
+                'valedictory'           => $doctor->valedictory,
+                'street'                => $doctor->street,
+                'streetExtended'        => $doctor->streetb,
+                'city'                  => Str::ucfirst(Str::lower($doctor->city)),
+                'state'                 => $doctor->state,
+                'zip'                   => $doctor->zip,
+                'country'               => 'US',
+                'street2'               => $doctor->street2,
+                'streetExtended2'       => $doctor->streetb2,
+                'city2'                 => Str::ucfirst(Str::lower($doctor->city2)),
+                'state2'                => $doctor->state2,
+                'zip2'                  => $doctor->zip2,
+                'country2'              => 'US',
+                'email'                 => $doctor->email,
+                'website'               => $doctor->url,
+                'phone'                 => $doctor->phone,
+                'cellphone'             => $doctor->phonecell,
+                'fax'                   => $doctor->fax,
+                'workPhone1'            => $doctor->phonew1,
+                'workPhone2'            => $doctor->phonew2,
+                'facilityID'            => ($doctor->facility_id == 0) ? null : $doctor->facility_id,
+                'created_at'            => now(),
+                'updated_at'            => now(),
+            ];
+        }
+        foreach (array_chunk($doctorList, $chunkItems) as $chunk) {
+            Referring::insert($chunk);
+        }
+
+        $this->command->line('         <bg=green;fg=white> DONE </> Copying referring doctors details.');
+        $this->command->newLine();
+
+        $this->command->line('         <bg=cyan;fg=white> PROC </> Copying rendering doctors details.');
+        $this->command->newLine();
+
+        // Connect to the original database and retrieve information.
+        $renDoctorsData = DB::connection('OriginalDatabase')->select('SELECT * FROM users WHERE fname != "Unknown" AND authorized = 1');
+
+        $renderingList = [];
+        foreach ($renDoctorsData as $doctor) {
+            $renderingList[] = [
+                'id'                    => $doctor->id,
+                'title'                 => $doctor->title,
+                'firstName'             => Str::ucfirst(Str::lower($doctor->fname)),
+                'middleName'            => Str::ucfirst(Str::lower($doctor->mname)),
+                'lastName'              => Str::ucfirst(Str::lower($doctor->lname)),
+                'abbreviation'          => $doctor->username,
+                'authorized'            => $doctor->authorized,
+                'npi'                   => $doctor->npi,
+                'upin'                  => $doctor->upin,
+                'claimAs'               => $doctor->claim_as,
+                'taxonomy'              => $doctor->taxonomy,
+                'stateLicenseNumber'    => $doctor->state_license_number,
+                'federalTaxID'          => $doctor->federaltaxid,
+                'federalDrugID'         => $doctor->federaldrugid,
+                'specialty'             => $doctor->specialty,
+                'billName'              => $doctor->billname,
+                'info'                  => $doctor->info,
+                'notes'                 => $doctor->notes,
+                'assistant'             => $doctor->assistant,
+                'organization'          => $doctor->organization,
+                'valedictory'           => $doctor->valedictory,
+                'street'                => $doctor->street,
+                'streetExtended'        => $doctor->streetb,
+                'city'                  => Str::ucfirst(Str::lower($doctor->city)),
+                'state'                 => $doctor->state,
+                'zip'                   => $doctor->zip,
+                'country'               => 'US',
+                'street2'               => $doctor->street2,
+                'streetExtended2'       => $doctor->streetb2,
+                'city2'                 => Str::ucfirst(Str::lower($doctor->city2)),
+                'state2'                => $doctor->state2,
+                'zip2'                  => $doctor->zip2,
+                'country2'              => 'US',
+                'email'                 => $doctor->email,
+                'website'               => $doctor->url,
+                'phone'                 => $doctor->phone,
+                'cellphone'             => $doctor->phonecell,
+                'fax'                   => $doctor->fax,
+                'workPhone1'            => $doctor->phonew1,
+                'workPhone2'            => $doctor->phonew2,
+                'facilityID'            => ($doctor->facility_id == 0) ? null : $doctor->facility_id,
+                'created_at'            => now(),
+                'updated_at'            => now(),
+            ];
+        }
+        foreach (array_chunk($renderingList, $chunkItems) as $chunk) {
+            Rendering::insert($chunk);
+        }
+
+        $this->command->line('         <bg=green;fg=white> DONE </> Copying rendering doctors details.');
+        $this->command->newLine();
+
+        $this->command->line('         <bg=cyan;fg=white> PROC </> Copying facilities details.');
+        $this->command->newLine();
+
+        // Connect to the original database and retrieve information.
+        $facilitiesData = DB::connection('OriginalDatabase')->select('SELECT * FROM facility');
+
+        $facilitiesList = [];
+        foreach ($facilitiesData as $facility) {
+            $facilitiesList[] = [
+                'id'                    => $facility->id,
+                'fillingAs'             => ($facility->filing_as == 2) ? 'group' : 'individual',
+                'groupName'             => ($facility->filing_as == 2) ? $facility->name : null,
+                'firstName'             => ($facility->filing_as == 2) ? null : $facility->name,
+                'middleName'            => ($facility->filing_as == 2) ? null : $facility->middle_name,
+                'lastName'              => ($facility->filing_as == 2) ? null : $facility->last_name,
+                'street'                => $facility->street,
+                'streetExtended'        => null,
+                'city'                  => $facility->city,
+                'state'                 => $facility->state,
+                'zip'                   => $facility->postal_code,
+                'country'               => $facility->country_code,
+                'payToStreet'           => $facility->pto_street,
+                'payToStreetExtended'   => null,
+                'payToCity'             => $facility->pto_city,
+                'payToState'            => $facility->pto_state,
+                'payToZip'              => $facility->pto_postal_code,
+                'payToCountry'          => $facility->country_code,
+                'phone'                 => $facility->phone,
+                'fax'                   => $facility->fax,
+                'email'                 => $facility->email,
+                'website'               => $facility->website,
+                'serviceLocation'       => ($facility->service_location == 1) ? true : false,
+                'billingLocation'       => ($facility->billing_location == 1) ? true : false,
+                'primaryBusinessEntity' => ($facility->primary_business_entity == 1) ? true : false,
+                'referenceLab'          => ($facility->reference_lab == 1) ? true : false,
+                'acceptsAssigment'      => ($facility->accepts_assignment == 1) ? true : false,
+                'prefix'                => $facility->practicePrefix,
+                'attn'                  => $facility->attn,
+                'creditCardsAccepted'   => $facility->cc_accepted,
+                'federalEIN'            => $facility->federal_ein,
+                'X12SenderID'           => $facility->x12_sender_id,
+                'domainIdentifier'      => $facility->domain_identifier,
+                'taxonomy'              => $facility->taxonomy,
+                'facilityNPI'           => $facility->facility_npi,
+                'taxIDType'             => $facility->tax_id_type,
+                'placeOfServiceID'      => $facility->pos_code,
+                'created_at'            => now(),
+                'updated_at'            => now(),
+            ];
+        }
+        foreach (array_chunk($facilitiesList, $chunkItems) as $chunk) {
+            Facility::insert($chunk);
+        }
+
+        $this->command->line('         <bg=green;fg=white> DONE </> Copying facilities details.');
         $this->command->newLine();
 
         $this->command->line('         <bg=cyan;fg=white> PROC </> Copying encounter details.');
@@ -310,127 +489,6 @@ class PatientClonerSeeder extends Seeder
         }
 
         $this->command->line('         <bg=green;fg=white> DONE </> Copying charge details.');
-        $this->command->newLine();
-
-        $this->command->line('         <bg=cyan;fg=white> PROC </> Copying referring doctors details.');
-        $this->command->newLine();
-
-        // Connect to the original database and retrieve information.
-        $refDoctorsData = DB::connection('OriginalDatabase')->select('SELECT * FROM users WHERE username = "" AND fname != "Unknown" AND authorized = 0');
-
-        $doctorList = [];
-        foreach ($refDoctorsData as $doctor) {
-            $doctorList[] = [
-                'id'                    => $doctor->id,
-                'title'                 => $doctor->title,
-                'firstName'             => Str::ucfirst(Str::lower($doctor->fname)),
-                'middleName'            => Str::ucfirst(Str::lower($doctor->mname)),
-                'lastName'              => Str::ucfirst(Str::lower($doctor->lname)),
-                'authorized'            => $doctor->authorized,
-                'npi'                   => $doctor->npi,
-                'upin'                  => $doctor->upin,
-                'claimAs'               => $doctor->claim_as,
-                'taxonomy'              => $doctor->taxonomy,
-                'stateLicenseNumber'    => $doctor->state_license_number,
-                'federalTaxID'          => $doctor->federaltaxid,
-                'federalDrugID'         => $doctor->federaldrugid,
-                'specialty'             => $doctor->specialty,
-                'billName'              => $doctor->billname,
-                'info'                  => $doctor->info,
-                'notes'                 => $doctor->notes,
-                'assistant'             => $doctor->assistant,
-                'organization'          => $doctor->organization,
-                'valedictory'           => $doctor->valedictory,
-                'street'                => $doctor->street,
-                'streetExtended'        => $doctor->streetb,
-                'city'                  => Str::ucfirst(Str::lower($doctor->city)),
-                'state'                 => $doctor->state,
-                'zip'                   => $doctor->zip,
-                'country'               => 'US',
-                'street2'               => $doctor->street2,
-                'streetExtended2'       => $doctor->streetb2,
-                'city2'                 => Str::ucfirst(Str::lower($doctor->city2)),
-                'state2'                => $doctor->state2,
-                'zip2'                  => $doctor->zip2,
-                'country2'              => 'US',
-                'email'                 => $doctor->email,
-                'website'               => $doctor->url,
-                'phone'                 => $doctor->phone,
-                'cellphone'             => $doctor->phonecell,
-                'fax'                   => $doctor->fax,
-                'workPhone1'            => $doctor->phonew1,
-                'workPhone2'            => $doctor->phonew2,
-                'facilityID'            => ($doctor->facility_id == 0) ? null : $doctor->facility_id,
-                'created_at'            => now(),
-                'updated_at'            => now(),
-            ];
-        }
-        foreach (array_chunk($doctorList, $chunkItems) as $chunk) {
-            Referring::insert($chunk);
-        }
-
-        $this->command->line('         <bg=green;fg=white> DONE </> Copying referring doctors details.');
-        $this->command->newLine();
-
-        $this->command->line('         <bg=cyan;fg=white> PROC </> Copying rendering doctors details.');
-        $this->command->newLine();
-
-        // Connect to the original database and retrieve information.
-        $renDoctorsData = DB::connection('OriginalDatabase')->select('SELECT * FROM users WHERE fname != "Unknown" AND authorized = 1');
-
-        $renderingList = [];
-        foreach ($renDoctorsData as $doctor) {
-            $renderingList[] = [
-                'id'                    => $doctor->id,
-                'title'                 => $doctor->title,
-                'firstName'             => Str::ucfirst(Str::lower($doctor->fname)),
-                'middleName'            => Str::ucfirst(Str::lower($doctor->mname)),
-                'lastName'              => Str::ucfirst(Str::lower($doctor->lname)),
-                'abbreviation'          => $doctor->username,
-                'authorized'            => $doctor->authorized,
-                'npi'                   => $doctor->npi,
-                'upin'                  => $doctor->upin,
-                'claimAs'               => $doctor->claim_as,
-                'taxonomy'              => $doctor->taxonomy,
-                'stateLicenseNumber'    => $doctor->state_license_number,
-                'federalTaxID'          => $doctor->federaltaxid,
-                'federalDrugID'         => $doctor->federaldrugid,
-                'specialty'             => $doctor->specialty,
-                'billName'              => $doctor->billname,
-                'info'                  => $doctor->info,
-                'notes'                 => $doctor->notes,
-                'assistant'             => $doctor->assistant,
-                'organization'          => $doctor->organization,
-                'valedictory'           => $doctor->valedictory,
-                'street'                => $doctor->street,
-                'streetExtended'        => $doctor->streetb,
-                'city'                  => Str::ucfirst(Str::lower($doctor->city)),
-                'state'                 => $doctor->state,
-                'zip'                   => $doctor->zip,
-                'country'               => 'US',
-                'street2'               => $doctor->street2,
-                'streetExtended2'       => $doctor->streetb2,
-                'city2'                 => Str::ucfirst(Str::lower($doctor->city2)),
-                'state2'                => $doctor->state2,
-                'zip2'                  => $doctor->zip2,
-                'country2'              => 'US',
-                'email'                 => $doctor->email,
-                'website'               => $doctor->url,
-                'phone'                 => $doctor->phone,
-                'cellphone'             => $doctor->phonecell,
-                'fax'                   => $doctor->fax,
-                'workPhone1'            => $doctor->phonew1,
-                'workPhone2'            => $doctor->phonew2,
-                'facilityID'            => ($doctor->facility_id == 0) ? null : $doctor->facility_id,
-                'created_at'            => now(),
-                'updated_at'            => now(),
-            ];
-        }
-        foreach (array_chunk($renderingList, $chunkItems) as $chunk) {
-            Rendering::insert($chunk);
-        }
-
-        $this->command->line('         <bg=green;fg=white> DONE </> Copying rendering doctors details.');
         $this->command->newLine();
     }
 }

@@ -25,6 +25,7 @@ class AuthServiceProvider extends ServiceProvider
         'App\Models\Invoices\Extras\SpecialCode'    => 'App\Policies\Invoices\Extras\SpecialCodePolicy',
         'App\Models\Doctors\Referring'              => 'App\Policies\Doctors\ReferringPolicy',
         'App\Models\Doctors\Rendering'              => 'App\Policies\Doctors\RenderingPolicy',
+        'App\Models\Locations\Facility'             => 'App\Policies\Locations\FacilityPolicy',
     ];
 
     /**

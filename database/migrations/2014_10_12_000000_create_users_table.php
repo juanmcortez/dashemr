@@ -22,10 +22,10 @@ return new class extends Migration
             $table->string('middleName', 64)->nullable();
             $table->string('lastName', 64)->nullable();
 
-            $table->string('email')->unique();
+            $table->string('email', 128)->unique();
             $table->timestamp('email_verified_at')->nullable();
 
-            $table->string('password');
+            $table->string('password', 256);
             $table->rememberToken();
 
             $table->timestamps();

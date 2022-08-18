@@ -59,11 +59,11 @@ return new class extends Migration
 
             $table->string('email', 128)->nullable();
             $table->string('website', 128)->nullable();
-            $table->string('phone', 16)->nullable();
-            $table->string('cellphone', 16)->nullable();
-            $table->string('fax', 16)->nullable();
-            $table->string('workPhone1', 16)->nullable();
-            $table->string('workPhone2', 16)->nullable();
+            $table->string('phone', 24)->nullable();
+            $table->string('cellphone', 24)->nullable();
+            $table->string('fax', 24)->nullable();
+            $table->string('workPhone1', 24)->nullable();
+            $table->string('workPhone2', 24)->nullable();
 
             $table->unsignedBigInteger('facilityID')->nullable();
 

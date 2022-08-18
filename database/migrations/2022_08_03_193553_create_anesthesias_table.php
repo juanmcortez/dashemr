@@ -24,11 +24,11 @@ return new class extends Migration
             $table->timestamp('anesthesiaLapseTime')->nullable();
             $table->integer('anesthesiaTimeUnits')->default(0)->nullable();
             $table->integer('anesthesiaBaseUnits')->default(0)->nullable();
-            $table->float('anesthesiaUnitCharge', 8, 2)->default(0)->nullable();
-            $table->string('anesthesiaM1')->nullable();
-            $table->string('anesthesiaM2')->nullable();
-            $table->string('anesthesiaInfusion')->nullable();
-            $table->float('anesthesiaBasicValue', 8, 2)->default(0)->nullable();
+            $table->decimal('anesthesiaUnitCharge', 8, 2)->default(0)->nullable();
+            $table->string('anesthesiaM1', 64)->nullable();
+            $table->string('anesthesiaM2', 64)->nullable();
+            $table->string('anesthesiaInfusion', 64)->nullable();
+            $table->decimal('anesthesiaBasicValue', 8, 2)->default(0)->nullable();
             $table->integer('anesthesiaModifierUnits')->default(0)->nullable();
 
             $table->timestamps();

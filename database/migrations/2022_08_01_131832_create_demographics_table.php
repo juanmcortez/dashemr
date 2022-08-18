@@ -26,28 +26,28 @@ return new class extends Migration
             $table->date('dateOfBirth')->default(now());
             $table->enum('genre', ['male', 'female', 'undisclosed', 'other', ''])->default('undisclosed');
 
-            $table->string('socialSecurityNumber')->nullable();
-            $table->string('driverLicenseNumber')->nullable();
+            $table->string('socialSecurityNumber', 24)->nullable();
+            $table->string('driverLicenseNumber', 24)->nullable();
 
-            $table->string('street')->nullable();
-            $table->string('streetExtended')->nullable();
-            $table->string('city')->nullable();
-            $table->string('state')->nullable();
-            $table->string('zip')->nullable();
-            $table->string('country')->nullable();
+            $table->string('street', 128)->nullable();
+            $table->string('streetExtended', 128)->nullable();
+            $table->string('city', 64)->nullable();
+            $table->string('state', 64)->nullable();
+            $table->string('zip', 64)->nullable();
+            $table->string('country', 64)->nullable();
 
-            $table->string('homePhone')->default('000 000-0000');
-            $table->string('cellPhone')->nullable();
-            $table->string('emailAddress')->nullable();
+            $table->string('homePhone', 24)->default('000 000-0000');
+            $table->string('cellPhone', 24)->nullable();
+            $table->string('emailAddress', 128)->nullable();
 
             $table->enum('civilStatus', ['unassigned', 'single', 'married', 'divorced', 'widowed', 'separated', 'domesticPartner', 'other', ''])->nullable();;
 
-            $table->string('language')->default('en');
-            $table->string('ethnicity')->default('unassigned');
-            $table->string('race')->default('unassigned');
+            $table->string('language', 2)->default('en');
+            $table->string('ethnicity', 16)->default('unassigned');
+            $table->string('race', 16)->default('unassigned');
 
             $table->date('dateDeceased')->nullable();
-            $table->string('reasonDeceased')->nullable();
+            $table->string('reasonDeceased', 128)->nullable();
 
             $table->timestamps();
             $table->softDeletes();

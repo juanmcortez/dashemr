@@ -43,10 +43,10 @@ const props = defineProps({
                     {{ invoice.serviceDateTo }}
                 </td>
                 <td class="p-2 text-center border border-slate-300 text-slate-500">
-                    {{ invoice.facilityID }}
+                    {{ invoice.service_facility.full_name }}
                 </td>
                 <td class="p-2 text-center border border-slate-300 text-slate-500">
-                    {{ invoice.billingFacilityID }}
+                    {{ invoice.billing_facility.full_name }}
                 </td>
                 <td class="p-2 text-center border border-slate-300 text-slate-500">
                     {{ invoice.placeOfServiceID }}
@@ -121,13 +121,13 @@ const props = defineProps({
                     {{ invoice.rendering_doctor.full_name }}
                 </td>
                 <td class="p-2 text-center border border-slate-300 text-slate-500">
-                    {{ invoice.referring_doctor.doctor_full_name }}
+                    {{ invoice.referring_doctor.full_name }}
                 </td>
                 <td class="p-2 text-center border border-slate-300 text-slate-500">
-                    {{ invoice.ordering_doctor.doctor_full_name }}
+                    {{ invoice.ordering_doctor.full_name }}
                 </td>
                 <td class="p-2 text-center border border-slate-300 text-slate-500">
-                    {{ invoice.supervising_doctor.doctor_full_name }}
+                    {{ invoice.supervising_doctor.full_name }}
                 </td>
             </tr>
         </tbody>

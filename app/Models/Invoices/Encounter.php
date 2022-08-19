@@ -6,6 +6,7 @@ use App\Models\Invoices\Charge;
 use App\Models\Patients\Patient;
 use App\Models\Doctors\Referring;
 use App\Models\Doctors\Rendering;
+use App\Models\Locations\Facility;
 use App\Models\Invoices\Extras\Lab;
 use App\Models\Invoices\Extras\Problem;
 use Illuminate\Database\Eloquent\Model;
@@ -90,6 +91,24 @@ class Encounter extends Model
     public function patient()
     {
         return $this->belongsTo(Patient::class, 'pid', 'pid')->with('demographic');
+    }
+
+
+    /**
+     * Get the Service Facility that the encounter belongs to.
+     */
+    public function serviceFacility()
+    {
+        return $this->hasOne(Facility::class, 'id', 'facilityID')->withDefault();
+    }
+
+
+    /**
+     * Get the Billing Facility that the encounter belongs to.
+     */
+    public function billingFacility()
+    {
+        return $this->hasOne(Facility::class, 'id', 'billingFacilityID')->withDefault();
     }
 
 

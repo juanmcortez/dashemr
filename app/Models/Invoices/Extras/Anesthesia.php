@@ -55,5 +55,7 @@ class Anesthesia extends Model
         'anesthesiaStartTime'   => 'datetime: H:i',
         'anesthesiaStopTime'    => 'datetime: H:i',
         'anesthesiaLapseTime'   => 'datetime: H:i',
+        'anesthesiaBaseUnits'   => 'decimal:2',
+        'anesthesiaBasicValue'  => 'decimal:2',
     ];
 }

@@ -2,6 +2,7 @@
 import SiteHeader from '@/Components/dashemr/LayoutParts/SiteHeader.vue';
 import Layout from '@/Layouts/newDesign.vue';
 import PatientsTable from '@/Components/dashemr/Table.vue';
+import Paginator from '@/Components/dashemr/Paginator.vue';
 
 const props = defineProps({
     fullTitle: {
@@ -27,6 +28,9 @@ const props = defineProps({
                 :columns="['Full Name', 'Home Phone', 'SSN', 'Date of Birth', 'Accession #', 'External ID', 'PID', 'Last Srv. Date']"
                 :colData="['demographic.full_name', 'demographic.homePhone', 'demographic.socialSecurityNumber', 'demographic.dateOfBirth', 'accountLevelAccession', 'externalPid', 'pid', 'latestServiceDate']"
                 :rowsData="patients.data" :rowsURL="['pid', 'patients.show']" />
+
+            <Paginator :pagesData="patients.links" :totalItems="patients.total" :perPage="patients.per_page"
+                :toPage="patients.to" :fromPage="patients.from" :lastPage="patients.last_page" class="mt-5" />
         </template>
     </Layout>
 

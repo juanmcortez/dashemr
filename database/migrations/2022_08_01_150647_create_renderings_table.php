@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('referrings', function (Blueprint $table) {
+        Schema::create('renderings', function (Blueprint $table) {
             $table->id();
 
             $table->string('title', 64)->nullable();
@@ -22,7 +22,8 @@ return new class extends Migration
             $table->string('middleName', 64)->nullable();
             $table->string('lastName', 64)->default('N');
 
-            $table->boolean('authorized')->default(false)->comment('Referring doctors are always un-authorized');
+            $table->string('abbreviation', 3)->nullable();
+            $table->boolean('authorized')->default(true)->comment('Rendering doctors are always authorized');
 
             $table->string('npi', 16)->nullable();
             $table->string('upin', 16)->nullable();
@@ -33,7 +34,7 @@ return new class extends Migration
             $table->string('federalTaxID', 16)->nullable();
             $table->string('federalDrugID', 16)->nullable();
 
-            $table->string('specialty', 64)->nullable();
+            $table->string('specialty', 128)->nullable();
             $table->string('billName', 64)->nullable();
             $table->mediumText('info')->nullable();
             $table->mediumText('notes')->nullable();
@@ -58,11 +59,11 @@ return new class extends Migration
 
             $table->string('email', 128)->nullable();
             $table->string('website', 128)->nullable();
-            $table->string('phone', 16)->nullable();
-            $table->string('cellphone', 16)->nullable();
-            $table->string('fax', 16)->nullable();
-            $table->string('workPhone1', 16)->nullable();
-            $table->string('workPhone2', 16)->nullable();
+            $table->string('phone', 24)->nullable();
+            $table->string('cellphone', 24)->nullable();
+            $table->string('fax', 24)->nullable();
+            $table->string('workPhone1', 24)->nullable();
+            $table->string('workPhone2', 24)->nullable();
 
             $table->unsignedBigInteger('facilityID')->nullable();
 
@@ -78,6 +79,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('referrings');
+        Schema::dropIfExists('renderings');
     }
 };

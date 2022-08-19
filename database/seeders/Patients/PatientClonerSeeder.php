@@ -17,6 +17,7 @@ use App\Models\Invoices\Extras\Problem;
 use App\Models\Invoices\Extras\Anesthesia;
 use App\Models\Invoices\Extras\SpecialCode;
 use App\Models\Invoices\Extras\Miscellaneous;
+use Database\Seeders\Locations\PlaceOfServiceSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class PatientClonerSeeder extends Seeder
@@ -274,6 +275,14 @@ class PatientClonerSeeder extends Seeder
         }
 
         $this->command->line('         <bg=green;fg=white> DONE </> Copying facilities details.');
+        $this->command->newLine();
+
+        $this->command->line('         <bg=cyan;fg=white> PROC </> Setting place of service details.');
+        $this->command->newLine();
+
+        $this->callSilent(PlaceOfServiceSeeder::class);
+
+        $this->command->line('         <bg=green;fg=white> DONE </> Setting place of service details.');
         $this->command->newLine();
 
         $this->command->line('         <bg=cyan;fg=white> PROC </> Copying encounter details.');

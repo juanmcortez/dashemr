@@ -102,7 +102,7 @@ class Referring extends Model
      *
      * @var array
      */
-    protected $appends = ['doctor_full_name'];
+    protected $appends = ['full_name'];
 
 
     /**
@@ -111,7 +111,7 @@ class Referring extends Model
      *
      * @return integer
      */
-    public function getDoctorFullNameAttribute()
+    public function getFullNameAttribute()
     {
         if ($this->middleName) {
             return Str::ucfirst(Str::lower($this->lastName)) . ', ' . Str::ucfirst(Str::lower($this->firstName)) . ' ' . Str::ucfirst(Str::lower($this->middleName));

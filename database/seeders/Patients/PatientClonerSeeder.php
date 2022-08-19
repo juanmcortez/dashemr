@@ -101,7 +101,8 @@ class PatientClonerSeeder extends Seeder
         $this->command->newLine();
 
         // Connect to the original database and retrieve information.
-        $refDoctorsData = DB::connection('OriginalDatabase')->select('SELECT * FROM users WHERE username = "" AND fname != "Unknown" AND authorized = 0');
+        $refDoctorsData = DB::connection('OriginalDatabase')
+            ->select('SELECT * FROM users WHERE active = 1 AND (authorized = 1 OR username = "") AND fname != "Unknown"');
 
         $doctorList = [];
         foreach ($refDoctorsData as $doctor) {

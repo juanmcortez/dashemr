@@ -22,18 +22,19 @@ return new class extends Migration
             $table->dateTime('serviceDate')->default(now());
             $table->dateTime('serviceDateTo')->nullable();
 
-            $table->unsignedBigInteger('facilityID')->nullable();
-            $table->unsignedBigInteger('billingFacilityID')->nullable();
+            $table->foreignId('facilityID')->nullable()->constrained('facilities', 'id');
+            $table->foreignId('billingFacilityID')->nullable()->constrained('facilities', 'id');
             $table->unsignedBigInteger('placeOfServiceID')->nullable();
+
             $table->enum('sensitivity', ['Normal', 'High', 'None'])->default('Normal');
 
             $table->dateTime('admisionDate')->nullable();
             $table->dateTime('dischargeDate')->nullable();
 
-            $table->unsignedBigInteger('renderingProviderID')->nullable();
-            $table->unsignedBigInteger('referringProviderID')->nullable();
-            $table->unsignedBigInteger('orderingProviderID')->nullable();
-            $table->unsignedBigInteger('supervisingProviderID')->nullable();
+            $table->foreignId('renderingProviderID')->nullable()->constrained('renderings', 'id');
+            $table->foreignId('referringProviderID')->nullable()->constrained('referrings', 'id');
+            $table->foreignId('orderingProviderID')->nullable()->constrained('referrings', 'id');
+            $table->foreignId('supervisingProviderID')->nullable()->constrained('referrings', 'id');
 
             $table->longText('consult')->nullable();
             $table->unsignedBigInteger('authorizationNumberID')->nullable();

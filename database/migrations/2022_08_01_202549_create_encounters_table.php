@@ -24,7 +24,7 @@ return new class extends Migration
 
             $table->foreignId('facilityID')->nullable()->constrained('facilities', 'id');
             $table->foreignId('billingFacilityID')->nullable()->constrained('facilities', 'id');
-            $table->unsignedBigInteger('placeOfServiceID')->nullable();
+            $table->foreignId('placeOfServiceID')->nullable()->constrained('place_of_services', 'id');
 
             $table->enum('sensitivity', ['Normal', 'High', 'None'])->default('Normal');
 

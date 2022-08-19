@@ -10,6 +10,7 @@ use App\Models\Locations\Facility;
 use App\Models\Invoices\Extras\Lab;
 use App\Models\Invoices\Extras\Problem;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Locations\PlaceOfService;
 use App\Models\Invoices\Extras\Miscellaneous;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -109,6 +110,15 @@ class Encounter extends Model
     public function billingFacility()
     {
         return $this->hasOne(Facility::class, 'id', 'billingFacilityID')->withDefault();
+    }
+
+
+    /**
+     * Get the Place of Service that the encounter belongs to.
+     */
+    public function placeOfService()
+    {
+        return $this->hasOne(PlaceOfService::class, 'id', 'placeOfServiceID')->withDefault();
     }
 
 

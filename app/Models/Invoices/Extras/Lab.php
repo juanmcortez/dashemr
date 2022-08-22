@@ -16,7 +16,7 @@ class Lab extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'encounter';
+    protected $primaryKey = 'encounterLab';
 
 
     /**
@@ -25,7 +25,7 @@ class Lab extends Model
      * @var array
      */
     protected $fillable = [
-        'encounter',
+        'encounterLab',
         'accessionNumberLabLevel',
         'salesRepresentative',
         'locationCode',
@@ -44,7 +44,7 @@ class Lab extends Model
      * @var array
      */
     protected $hidden = [
-        'encounter',
+        'encounterLab',
         'created_at',
         'updated_at',
         'deleted_at',

@@ -16,7 +16,7 @@ class Miscellaneous extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'encounter';
+    protected $primaryKey = 'encounterMisc';
 
 
     /**
@@ -25,7 +25,7 @@ class Miscellaneous extends Model
      * @var array
      */
     protected $fillable = [
-        'encounter',
+        'encounterMisc',
         'mammographyCertificateNumber',
         'originalReferenceNumber',
         'delayReason',
@@ -49,7 +49,7 @@ class Miscellaneous extends Model
      * @var array
      */
     protected $hidden = [
-        'encounter',
+        'encounterMisc',
         'created_at',
         'updated_at',
         'deleted_at',

@@ -165,7 +165,7 @@ class Encounter extends Model
      */
     public function problemTab()
     {
-        return $this->hasOne(Problem::class, 'encounter', 'encounter');
+        return $this->hasOne(Problem::class, 'encounterProb', 'encounter');
     }
 
 
@@ -176,7 +176,7 @@ class Encounter extends Model
      */
     public function miscellaneousTab()
     {
-        return $this->hasOne(Miscellaneous::class, 'encounter', 'encounter');
+        return $this->hasOne(Miscellaneous::class, 'encounterMisc', 'encounter');
     }
 
 
@@ -187,7 +187,7 @@ class Encounter extends Model
      */
     public function labTab()
     {
-        return $this->hasOne(Lab::class, 'encounter', 'encounter');
+        return $this->hasOne(Lab::class, 'encounterLab', 'encounter');
     }
 
 

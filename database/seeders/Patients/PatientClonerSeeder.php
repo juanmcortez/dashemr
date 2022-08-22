@@ -348,7 +348,7 @@ class PatientClonerSeeder extends Seeder
             }
 
             $problemsTab[] = [
-                'encounter'                 => $encounterInfo->encounter,
+                'encounterProb'             => $encounterInfo->encounter,
                 'conditionOriginatedDate'   => (empty($extraData[1][1])) ? null : date('Y-m-d', strtotime($extraData[1][1])),
                 'firstConsultedDate'        => (empty($extraData[1][2])) ? null : date('Y-m-d', strtotime($extraData[1][2])),
                 'lastSeenDate'              => (empty($extraData[1][3])) ? null : date('Y-m-d', strtotime($extraData[1][3])),
@@ -363,7 +363,7 @@ class PatientClonerSeeder extends Seeder
             ];
 
             $miscellaneousTab[] = [
-                'encounter'                     => $encounterInfo->encounter,
+                'encounterMisc'                 => $encounterInfo->encounter,
                 'mammographyCertificateNumber'  => $extraData[2][1],
                 'claimReason'                   => $extraData[2][2],
                 'originalReferenceNumber'       => $extraData[2][3],
@@ -385,7 +385,7 @@ class PatientClonerSeeder extends Seeder
             ];
 
             $labTab[] = [
-                'encounter'                 => $encounterInfo->encounter,
+                'encounterLab'              => $encounterInfo->encounter,
                 'accessionNumberLabLevel'   => $extraData[3][1],
                 'salesRepresentative'       => $extraData[3][2],
                 'locationCode'              => $extraData[3][3],

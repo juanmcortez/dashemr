@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('miscellaneouses', function (Blueprint $table) {
-            $table->foreignId('encounter')->constrained('encounters', 'encounter');
+            $table->foreignId('encounterMisc')->primary()->index()->unique()->constrained('encounters', 'encounter');
 
             $table->string('mammographyCertificateNumber', 64)->nullable();
             $table->string('claimReason', 64)->nullable();

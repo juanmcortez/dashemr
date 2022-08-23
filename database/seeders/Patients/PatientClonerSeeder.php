@@ -296,6 +296,11 @@ class PatientClonerSeeder extends Seeder
         foreach ($encounterData as $encounterInfo) {
             $encounterInfo->date = ($encounterInfo->date == '1969-12-31 00:00:00') ? now() : $encounterInfo->date;
 
+            // Check if referring exists.
+            if (!Referring::find($encounterInfo->referring_physician_id)) {
+                $encounterInfo->referring_physician_id = 0;
+            }
+
             $encounter[] = [
                 'encounter'             => $encounterInfo->encounter,
                 'pid'                   => $encounterInfo->pid,
@@ -320,7 +325,7 @@ class PatientClonerSeeder extends Seeder
             $extraFields = DB::connection('OriginalDatabase')
                 ->select(
                     'SELECT * FROM metadata_fields_values WHERE pid = :pid AND encounter = :enc ORDER BY id_tab, id_field',
-                    ['pid' => $patientInfo->pid, 'enc' => $encounterInfo->encounter]
+                    ['pid' => $encounterInfo->pid, 'enc' => $encounterInfo->encounter]
                 );
 
             $extraData = [];

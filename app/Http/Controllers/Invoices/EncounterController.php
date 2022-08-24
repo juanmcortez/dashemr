@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Invoices;
 
 use Inertia\Inertia;
+use App\Models\Settings\Practice;
 use App\Models\Invoices\Encounter;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Invoices\StoreEncounterRequest;
@@ -50,7 +51,8 @@ class EncounterController extends Controller
     public function show(Encounter $encounter)
     {
         return Inertia::render('Invoices/Show', [
-            'invoice' => $encounter->load('patient', 'serviceFacility', 'billingFacility', 'placeOfService', 'renderingDoctor', 'referringDoctor', 'orderingDoctor', 'supervisingDoctor', 'problemTab', 'miscellaneousTab', 'labTab', 'chargesList')
+            'invoice' => $encounter->load('patient', 'serviceFacility', 'billingFacility', 'placeOfService', 'renderingDoctor', 'referringDoctor', 'orderingDoctor', 'supervisingDoctor', 'problemTab', 'miscellaneousTab', 'labTab', 'chargesList'),
+            'practice' => Practice::first(),
         ]);
     }
 

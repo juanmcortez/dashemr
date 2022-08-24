@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Patients\Patient;
 use App\Models\Doctors\Referring;
 use App\Models\Doctors\Rendering;
+use App\Models\Settings\Practice;
 use App\Models\Invoices\Encounter;
 use App\Models\Locations\Facility;
 use Illuminate\Support\Facades\DB;
@@ -43,6 +44,22 @@ class PatientClonerSeeder extends Seeder
         //Config the selected database
         // config()->set('database.connections.OriginalDatabase.database', $dbname);
         // DB::purge('OriginalDatabase');
+
+        // Create the Practice Config Information
+        $this->command->line('         <bg=cyan;fg=white> PROC </> Creating practice settings items.');
+        $this->command->newLine();
+
+        if (config('database.connections.OriginalDatabase.database') == 'NS_lab') {
+            $practice['isLabPractice'] = true;
+            $practice['labPracticeType'] = 'type1';
+        } else {
+            $practice['isLabPractice'] = false;
+        }
+        Practice::insert($practice);
+
+        $this->command->line('         <bg=green;fg=white> DONE </> Creating practice settings items.');
+        $this->command->newLine();
+
 
         // Connect to the original database and retrieve information.
         $patientData = DB::connection('OriginalDatabase')->select('SELECT * FROM patient_data');

@@ -1,7 +1,7 @@
 <script setup>
 import DashEMRinput from '@/Components/dashemr/inputField.vue';
 import DashEMRcheck from '@/Components/dashemr/checkField.vue';
-import DashEMRSelect from '@/Components/dashemr/selectField.vue';
+import DashEMRSelect from '@/Components/dashemr/SelectField.vue';
 const props = defineProps({
     content: {
         type: Object,

@@ -2,7 +2,7 @@
 import SiteHeader from '@/Components/dashemr/LayoutParts/SiteHeader.vue';
 import Layout from '@/Layouts/newDesign.vue';
 import DashEMRCheck from '@/Components/dashemr/checkField.vue';
-import DashEMRSelect from '@/Components/dashemr/selectField.vue';
+import DashEMRSelect from '@/Components/dashemr/SelectField.vue';
 import DashEMRDivider from '@/Components/dashemr/PageTitleDivider.vue';
 
 const props = defineProps({

@@ -16,6 +16,10 @@ const props = defineProps({
         type: Object,
         default: () => ({})
     },
+    showLab: {
+        type: Boolean,
+        default: false,
+    }
 });
 const openProblem = ref(false);
 const openMisc = ref(false);
@@ -27,8 +31,11 @@ const openLab = ref(false);
         (openProblem || openMisc || openLab) ? 'right-0' : '-right-[600px]'
     ]">
         <div class="w-full h-full border-l mt-36 bg-zinc-200 border-zinc-500 border-y border-md">
-            <ul class="absolute top-0 -left-[116px] flex flex-row mt-[273px] -rotate-90">
-                <li @click="openLab = !openLab, openMisc = openProblem = false" :class="[
+            <ul :class="[
+                'absolute top-0 flex flex-row -rotate-90',
+                (showLab) ? '-left-[116px]  mt-[273px]' : '-left-[81px]  mt-[238px]'
+            ]">
+                <li v-if="showLab" @click="openLab = !openLab, openMisc = openProblem = false" :class="[
                     'px-4 py-1 mr-2 border-zinc-500 border-x cursor-pointer',
                     (openLab) ? 'bg-zinc-200 border-t' : 'text-zinc-50 bg-zinc-500 border-y'
                 ]">
@@ -64,7 +71,7 @@ const openLab = ref(false);
 
 
             <!-- Lab content -->
-            <div :class="['px-8 py-6 flex flex-col', (openLab) ? '' : 'hidden']">
+            <div v-if="showLab" :class="['px-8 py-6 flex flex-col', (openLab) ? '' : 'hidden']">
                 <LabContent :content="lab" />
             </div>
             <!-- Lab content -->

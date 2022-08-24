@@ -10,6 +10,10 @@ const props = defineProps({
         type: Object,
         default: () => ({})
     },
+    practice: {
+        type: Object,
+        default: () => ({})
+    },
 });
 </script>
 
@@ -26,7 +30,8 @@ const props = defineProps({
 
         <template #PageContent>
 
-            <EncounterTabs :prob="invoice.problem_tab" :misc="invoice.miscellaneous_tab" :lab="invoice.lab_tab" />
+            <EncounterTabs :prob="invoice.problem_tab" :misc="invoice.miscellaneous_tab" :lab="invoice.lab_tab"
+                :showLab="practice.isLabPractice" />
 
             <EncounterDetails :invoice="invoice" />
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Settings;
 
+use Inertia\Inertia;
 use App\Models\Settings\Practice;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Settings\StorePracticeRequest;
@@ -16,7 +17,13 @@ class PracticeController extends Controller
      */
     public function index()
     {
-        //
+        $practice = Practice::first();
+        return Inertia::render('Settings/Practice/Edit', [
+            'practice'              => $practice,
+            'typeOptions'           => $practice->typeOptions(),
+            'schedulerOptions'      => $practice->schedulerOptions(),
+            'eligibilityOptions'    => $practice->eligibilityOptions()
+        ]);
     }
 
     /**

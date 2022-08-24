@@ -41,7 +41,49 @@ class Practice extends Model
      * @var array
      */
     protected $casts = [
-        'isLabPractice'     => 'boolean',
-        'labPracticeType'   => 'boolean',
+        'isLabPractice' => 'boolean',
     ];
+
+
+    /**
+     * This is the set of options for the "Type" select
+     *
+     * @return array
+     */
+    public function typeOptions()
+    {
+        return [
+            ['value' => '', 'description' => 'No lab options'],
+            ['value' => 'type1', 'description' => 'Lab options with claim level Accession #'],
+            ['value' => 'type2', 'description' => 'Lab options with patient level Accession #'],
+        ];
+    }
+
+
+    /**
+     * This is the set of options for the "Scheduler" select
+     *
+     * @return array
+     */
+    public function schedulerOptions()
+    {
+        return [
+            ['value' => false, 'description' => 'Disabled'],
+            ['value' => true, 'description' => 'Enabled'],
+        ];
+    }
+
+
+    /**
+     * This is the set of options for the "Eligibility" select
+     *
+     * @return array
+     */
+    public function eligibilityOptions()
+    {
+        return [
+            ['value' => false, 'description' => 'Disabled'],
+            ['value' => true, 'description' => 'Enabled'],
+        ];
+    }
 }

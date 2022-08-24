@@ -1,5 +1,14 @@
 <script setup>
-const props = defineProps(['selected', 'options']);
+const props = defineProps({
+    selected: {
+        type: Object,
+        default: () => ({})
+    },
+    options: {
+        type: Array,
+        default: [],
+    }
+});
 </script>
 <template>
     <select :class="[
@@ -7,12 +16,9 @@ const props = defineProps(['selected', 'options']);
         (!selected) ? 'text-zinc-400' : 'text-zinc-600'
     ]">
         <option>Select ...</option>
-        <option :selected="(options) ? true : false">{{ options }}</option>
-        <!--
         <option v-for="(item, idx) in options" :value="item.value" :selected="(selected == item.value) ? true : false"
             :key="idx">
             {{ item.description }}
         </option>
-        -->
     </select>
 </template>

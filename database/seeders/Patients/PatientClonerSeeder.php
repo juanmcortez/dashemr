@@ -51,7 +51,7 @@ class PatientClonerSeeder extends Seeder
 
         if (config('database.connections.OriginalDatabase.database') == 'NS_lab') {
             $practice['isLabPractice'] = true;
-            $practice['labPracticeType'] = 'type1';
+            $practice['labPracticeType'] = 'type2';
         } else {
             $practice['isLabPractice'] = false;
         }

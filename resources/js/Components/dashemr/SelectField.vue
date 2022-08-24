@@ -12,7 +12,7 @@ const props = defineProps({
 </script>
 <template>
     <select :class="[
-        'w-full text-xs leading-5 bg-transparent border rounded border-zinc-300 focus:border-zinc-400 focus:ring-transparent placeholder:text-zinc-400',
+        'w-full text-xs leading-5 bg-transparent border rounded border-zinc-300 focus:border-zinc-400 focus:ring-transparent placeholder:text-zinc-400 hover:cursor-pointer',
         (!selected) ? 'text-zinc-400' : 'text-zinc-600'
     ]">
         <option>Select ...</option>

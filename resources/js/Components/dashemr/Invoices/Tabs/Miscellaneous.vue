@@ -7,6 +7,10 @@ const props = defineProps({
         type: Object,
         default: () => ({})
     },
+    options: {
+        type: Object,
+        default: () => ({}),
+    },
 });
 </script>
 <template>
@@ -19,7 +23,7 @@ const props = defineProps({
     <div class="flex w-full pb-2.5">
         <div class="w-4/12 font-semibold leading-10 text-right">Claim reason</div>
         <div class="w-8/12 pl-3">
-            <DashEMRSelect name="claimReason" :selected="content.claimReason" :options="content.claimReason" disabled />
+            <DashEMRSelect name="claimReason" :selected="content.claimReason" :options="options.claimReason" disabled />
         </div>
     </div>
     <div class="flex w-full pb-2.5">
@@ -31,13 +35,13 @@ const props = defineProps({
     <div class="flex w-full pb-2.5">
         <div class="w-4/12 font-semibold leading-10 text-right">Delay reason</div>
         <div class="w-8/12 pl-3">
-            <DashEMRSelect name="delayReason" :selected="content.delayReason" :options="content.delayReason" disabled />
+            <DashEMRSelect name="delayReason" :selected="content.delayReason" :options="options.delayReason" disabled />
         </div>
     </div>
     <div class="flex w-full pb-2.5">
         <div class="w-4/12 font-semibold leading-10 text-right">Claim note</div>
         <div class="w-8/12 pl-3">
-            <DashEMRSelect name="claimNote" :selected="content.claimNote" :options="content.claimNote" disabled />
+            <DashEMRSelect name="claimNote" :selected="content.claimNote" :options="options.claimNote" disabled />
         </div>
     </div>
     <div class="flex w-full pb-2.5">
@@ -49,7 +53,7 @@ const props = defineProps({
     <div class="flex w-full pb-2.5">
         <div class="w-4/12 font-semibold leading-10 text-right">Line note</div>
         <div class="w-8/12 pl-3">
-            <DashEMRSelect name="lineNote" :selected="content.lineNote" :options="content.lineNote" disabled />
+            <DashEMRSelect name="lineNote" :selected="content.lineNote" :options="options.lineNote" disabled />
         </div>
     </div>
     <div class="flex w-full pb-2.5">
@@ -61,14 +65,14 @@ const props = defineProps({
     <div class="flex w-full pb-2.5">
         <div class="w-4/12 font-semibold leading-10 text-right">Report type</div>
         <div class="w-8/12 pl-3">
-            <DashEMRSelect name="reportType" :selected="content.reportType" :options="content.reportType" disabled />
+            <DashEMRSelect name="reportType" :selected="content.reportType" :options="options.reportType" disabled />
         </div>
     </div>
     <div class="flex w-full pb-2.5">
         <div class="w-4/12 font-semibold leading-10 text-right">Report transmission</div>
         <div class="w-8/12 pl-3">
             <DashEMRSelect name="reportTransmission" :selected="content.reportTransmission"
-                :options="content.reportTransmission" disabled />
+                :options="options.reportTransmission" disabled />
         </div>
     </div>
     <div class="flex w-full pb-2.5">
@@ -92,19 +96,19 @@ const props = defineProps({
     <div class="flex w-full pb-2.5">
         <div class="w-4/12 font-semibold leading-10 text-right">Condition 1</div>
         <div class="w-8/12 pl-3">
-            <DashEMRSelect name="condition1" :selected="content.condition1" :options="content.condition1" disabled />
+            <DashEMRSelect name="condition1" :selected="content.condition1" :options="options.condition1" disabled />
         </div>
     </div>
     <div class="flex w-full pb-2.5">
         <div class="w-4/12 font-semibold leading-10 text-right">Condition 2</div>
         <div class="w-8/12 pl-3">
-            <DashEMRSelect name="condition2" :selected="content.condition2" :options="content.condition2" disabled />
+            <DashEMRSelect name="condition2" :selected="content.condition2" :options="options.condition2" disabled />
         </div>
     </div>
     <div class="flex w-full">
         <div class="w-4/12 font-semibold leading-10 text-right">Condition 3</div>
         <div class="w-8/12 pl-3">
-            <DashEMRSelect name="condition3" :selected="content.condition3" :options="content.condition3" disabled />
+            <DashEMRSelect name="condition3" :selected="content.condition3" :options="options.condition3" disabled />
         </div>
     </div>
 </template>

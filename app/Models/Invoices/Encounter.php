@@ -159,6 +159,104 @@ class Encounter extends Model
 
 
     /**
+     * Load all the options for the selects on tabs
+     *
+     * @return void
+     */
+    public function loadOptions()
+    {
+        $illnessAccidentPregnancy = [
+            [
+                'value'         => '',
+                'description'   => '---',
+            ],
+        ];
+        $claimReason = [
+            [
+                'value'         => '',
+                'description'   => '---',
+            ],
+        ];
+        $delayReason = [
+            [
+                'value'         => '',
+                'description'   => '---',
+            ],
+        ];
+        $claimNote = [
+            [
+                'value'         => '',
+                'description'   => '---',
+            ],
+        ];
+        $lineNote = [
+            [
+                'value'         => '',
+                'description'   => '---',
+            ],
+        ];
+        $reportType = [
+            [
+                'value'         => '',
+                'description'   => '---',
+            ],
+        ];
+        $reportTransmission = [
+            [
+                'value'         => '',
+                'description'   => '---',
+            ],
+        ];
+        $condition1 = $condition2 = $condition3 = [
+            [
+                'value'         => '',
+                'description'   => '---',
+            ],
+        ];
+        $locationCode = [
+            [
+                'value'         => '',
+                'description'   => '---',
+            ],
+        ];
+        $locationName = [
+            [
+                'value'         => '',
+                'description'   => '---',
+            ],
+        ];
+        $referenceLab = [
+            [
+                'value'         => '',
+                'description'   => '---',
+            ],
+        ];
+
+        return [
+            'problemTab' => [
+                'illnessAccidentPregnancy' => $illnessAccidentPregnancy,
+            ],
+            'miscTab' => [
+                'claimReason'           => $claimReason,
+                'delayReason'           => $delayReason,
+                'claimNote'             => $claimNote,
+                'lineNote'              => $lineNote,
+                'reportType'            => $reportType,
+                'reportTransmission'    => $reportTransmission,
+                'condition1'            => $condition1,
+                'condition2'            => $condition2,
+                'condition3'            => $condition3,
+            ],
+            'labTab' => [
+                'locationCode' => $locationCode,
+                'locationName' => $locationName,
+                'referenceLab' => $referenceLab,
+            ],
+        ];
+    }
+
+
+    /**
      * Get problems information associated to encounter
      *
      * @return void

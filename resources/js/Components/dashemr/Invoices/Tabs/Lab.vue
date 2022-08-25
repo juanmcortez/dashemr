@@ -6,6 +6,10 @@ const props = defineProps({
         type: Object,
         default: () => ({})
     },
+    options: {
+        type: Object,
+        default: () => ({}),
+    },
 });
 </script>
 <template>
@@ -24,14 +28,14 @@ const props = defineProps({
     <div class="flex w-full pb-2.5">
         <div class="w-4/12 font-semibold leading-10 text-right">Location code</div>
         <div class="w-8/12 pl-3 leading-8">
-            <DashEMRSelect name="locationCode" :selected="content.locationCode" :options="content.locationCode"
+            <DashEMRSelect name="locationCode" :selected="content.locationCode" :options="options.locationCode"
                 disabled />
         </div>
     </div>
     <div class="flex w-full pb-2.5">
         <div class="w-4/12 font-semibold leading-10 text-right">Location name</div>
         <div class="w-8/12 pl-3 leading-8">
-            <DashEMRSelect name="locationName" :selected="content.locationName" :options="content.locationName"
+            <DashEMRSelect name="locationName" :selected="content.locationName" :options="options.locationName"
                 disabled />
         </div>
     </div>
@@ -44,7 +48,7 @@ const props = defineProps({
     <div class="flex w-full pb-2.5">
         <div class="w-4/12 font-semibold leading-10 text-right">Reference lab</div>
         <div class="w-8/12 pl-3 leading-8">
-            <DashEMRSelect name="referenceLab" :selected="content.referenceLab" :options="content.referenceLab"
+            <DashEMRSelect name="referenceLab" :selected="content.referenceLab" :options="options.referenceLab"
                 disabled />
         </div>
     </div>

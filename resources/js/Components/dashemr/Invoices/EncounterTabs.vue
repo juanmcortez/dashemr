@@ -16,6 +16,10 @@ const props = defineProps({
         type: Object,
         default: () => ({})
     },
+    options: {
+        type: Object,
+        default: () => ({})
+    },
     showLab: {
         type: Boolean,
         default: false,
@@ -58,21 +62,21 @@ const openLab = ref(false);
 
             <!-- Problem content -->
             <div :class="['px-8 py-6 flex flex-col', (openProblem) ? '' : 'hidden']">
-                <ProblemContent :content="prob" />
+                <ProblemContent :content="prob" :options="options.problemTab" />
             </div>
             <!-- Problem content -->
 
 
             <!-- Miscellaneous content -->
             <div :class="['px-8 py-6 flex flex-col', (openMisc) ? '' : 'hidden']">
-                <MiscellaneousContent :content="misc" />
+                <MiscellaneousContent :content="misc" :options="options.miscTab" />
             </div>
             <!-- Miscellaneous content -->
 
 
             <!-- Lab content -->
             <div v-if="showLab" :class="['px-8 py-6 flex flex-col', (openLab) ? '' : 'hidden']">
-                <LabContent :content="lab" />
+                <LabContent :content="lab" :options="options.labTab" />
             </div>
             <!-- Lab content -->
         </div>

@@ -51,8 +51,9 @@ class EncounterController extends Controller
     public function show(Encounter $encounter)
     {
         return Inertia::render('Invoices/Show', [
-            'invoice' => $encounter->load('patient', 'serviceFacility', 'billingFacility', 'placeOfService', 'renderingDoctor', 'referringDoctor', 'orderingDoctor', 'supervisingDoctor', 'problemTab', 'miscellaneousTab', 'labTab', 'chargesList'),
-            'practice' => Practice::first(),
+            'invoice'   => $encounter->load('patient', 'serviceFacility', 'billingFacility', 'placeOfService', 'renderingDoctor', 'referringDoctor', 'orderingDoctor', 'supervisingDoctor', 'problemTab', 'miscellaneousTab', 'labTab', 'chargesList'),
+            'options'   => $encounter->loadOptions(),
+            'practice'  => Practice::first(),
         ]);
     }
 

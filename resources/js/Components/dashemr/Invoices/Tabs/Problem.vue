@@ -5,7 +5,11 @@ import DashEMRSelect from '@/Components/dashemr/SelectField.vue';
 const props = defineProps({
     content: {
         type: Object,
-        default: () => ({})
+        default: () => ({}),
+    },
+    options: {
+        type: Object,
+        default: () => ({}),
     },
 });
 </script>
@@ -44,7 +48,7 @@ const props = defineProps({
         <div class="w-4/12 font-semibold leading-10 text-right">Illness Accident Pregnancy</div>
         <div class="w-8/12 pl-3">
             <DashEMRSelect name="illnessAccidentPregnancy" :selected="content.illnessAccidentPregnancy"
-                :options="content.illnessAccidentPregnancy" disabled />
+                :options="options.illnessAccidentPregnancy" disabled />
         </div>
     </div>
     <div class="flex w-full pb-2.5">

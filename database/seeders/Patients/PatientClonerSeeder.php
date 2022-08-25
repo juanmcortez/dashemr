@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 use App\Models\Patients\Patient;
 use App\Models\Doctors\Referring;
 use App\Models\Doctors\Rendering;
+use App\Models\Settings\Practice;
 use App\Models\Invoices\Encounter;
 use App\Models\Locations\Facility;
 use Illuminate\Support\Facades\DB;
@@ -17,6 +18,7 @@ use App\Models\Invoices\Extras\Problem;
 use App\Models\Invoices\Extras\Anesthesia;
 use App\Models\Invoices\Extras\SpecialCode;
 use App\Models\Invoices\Extras\Miscellaneous;
+use Database\Seeders\Locations\PlaceOfServiceSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class PatientClonerSeeder extends Seeder
@@ -42,6 +44,22 @@ class PatientClonerSeeder extends Seeder
         //Config the selected database
         // config()->set('database.connections.OriginalDatabase.database', $dbname);
         // DB::purge('OriginalDatabase');
+
+        // Create the Practice Config Information
+        $this->command->line('         <bg=cyan;fg=white> PROC </> Creating practice settings items.');
+        $this->command->newLine();
+
+        if (config('database.connections.OriginalDatabase.database') == 'NS_lab') {
+            $practice['isLabPractice'] = true;
+            $practice['labPracticeType'] = 'type2';
+        } else {
+            $practice['isLabPractice'] = false;
+        }
+        Practice::insert($practice);
+
+        $this->command->line('         <bg=green;fg=white> DONE </> Creating practice settings items.');
+        $this->command->newLine();
+
 
         // Connect to the original database and retrieve information.
         $patientData = DB::connection('OriginalDatabase')->select('SELECT * FROM patient_data');
@@ -276,6 +294,14 @@ class PatientClonerSeeder extends Seeder
         $this->command->line('         <bg=green;fg=white> DONE </> Copying facilities details.');
         $this->command->newLine();
 
+        $this->command->line('         <bg=cyan;fg=white> PROC </> Setting place of service details.');
+        $this->command->newLine();
+
+        $this->callSilent(PlaceOfServiceSeeder::class);
+
+        $this->command->line('         <bg=green;fg=white> DONE </> Setting place of service details.');
+        $this->command->newLine();
+
         $this->command->line('         <bg=cyan;fg=white> PROC </> Copying encounter details.');
         $this->command->newLine();
 
@@ -286,6 +312,11 @@ class PatientClonerSeeder extends Seeder
         $encounter = $problemsTab = $miscellaneousTab = $labTab = [];
         foreach ($encounterData as $encounterInfo) {
             $encounterInfo->date = ($encounterInfo->date == '1969-12-31 00:00:00') ? now() : $encounterInfo->date;
+
+            // Check if referring exists.
+            if (!Referring::find($encounterInfo->referring_physician_id)) {
+                $encounterInfo->referring_physician_id = 0;
+            }
 
             $encounter[] = [
                 'encounter'             => $encounterInfo->encounter,
@@ -311,7 +342,7 @@ class PatientClonerSeeder extends Seeder
             $extraFields = DB::connection('OriginalDatabase')
                 ->select(
                     'SELECT * FROM metadata_fields_values WHERE pid = :pid AND encounter = :enc ORDER BY id_tab, id_field',
-                    ['pid' => $patientInfo->pid, 'enc' => $encounterInfo->encounter]
+                    ['pid' => $encounterInfo->pid, 'enc' => $encounterInfo->encounter]
                 );
 
             $extraData = [];
@@ -339,7 +370,7 @@ class PatientClonerSeeder extends Seeder
             }
 
             $problemsTab[] = [
-                'encounter'                 => $encounterInfo->encounter,
+                'encounterProb'             => $encounterInfo->encounter,
                 'conditionOriginatedDate'   => (empty($extraData[1][1])) ? null : date('Y-m-d', strtotime($extraData[1][1])),
                 'firstConsultedDate'        => (empty($extraData[1][2])) ? null : date('Y-m-d', strtotime($extraData[1][2])),
                 'lastSeenDate'              => (empty($extraData[1][3])) ? null : date('Y-m-d', strtotime($extraData[1][3])),
@@ -354,7 +385,7 @@ class PatientClonerSeeder extends Seeder
             ];
 
             $miscellaneousTab[] = [
-                'encounter'                     => $encounterInfo->encounter,
+                'encounterMisc'                 => $encounterInfo->encounter,
                 'mammographyCertificateNumber'  => $extraData[2][1],
                 'claimReason'                   => $extraData[2][2],
                 'originalReferenceNumber'       => $extraData[2][3],
@@ -376,7 +407,7 @@ class PatientClonerSeeder extends Seeder
             ];
 
             $labTab[] = [
-                'encounter'                 => $encounterInfo->encounter,
+                'encounterLab'              => $encounterInfo->encounter,
                 'accessionNumberLabLevel'   => $extraData[3][1],
                 'salesRepresentative'       => $extraData[3][2],
                 'locationCode'              => $extraData[3][3],

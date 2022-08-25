@@ -49,7 +49,7 @@ const props = defineProps({
                     {{ invoice.billing_facility.full_name }}
                 </td>
                 <td class="p-2 text-center border border-slate-300 text-slate-500">
-                    {{ invoice.placeOfServiceID }}
+                    {{ invoice.place_of_service.code }}: {{ invoice.place_of_service.title }}
                 </td>
             </tr>
         </tbody>

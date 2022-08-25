@@ -1,22 +1,14 @@
 <?php
 
-namespace App\Models\Invoices\Extras;
+namespace App\Models\Locations;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Lab extends Model
+class PlaceOfService extends Model
 {
     use HasFactory, SoftDeletes;
-
-
-    /**
-     * The primary key associated with the table.
-     *
-     * @var string
-     */
-    protected $primaryKey = 'encounterLab';
 
 
     /**
@@ -25,16 +17,10 @@ class Lab extends Model
      * @var array
      */
     protected $fillable = [
-        'encounterLab',
-        'accessionNumberLabLevel',
-        'salesRepresentative',
-        'locationCode',
-        'locationName',
-        'labUserDefined',
-        'referenceLab',
-        'panelName',
-        'labTestType',
-        'billingType',
+        'id',
+        'code',
+        'title',
+        'Description',
     ];
 
 
@@ -44,7 +30,7 @@ class Lab extends Model
      * @var array
      */
     protected $hidden = [
-        'encounterLab',
+        'id',
         'created_at',
         'updated_at',
         'deleted_at',

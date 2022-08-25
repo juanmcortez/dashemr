@@ -10,6 +10,7 @@ use App\Models\Locations\Facility;
 use App\Models\Invoices\Extras\Lab;
 use App\Models\Invoices\Extras\Problem;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Locations\PlaceOfService;
 use App\Models\Invoices\Extras\Miscellaneous;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -113,6 +114,15 @@ class Encounter extends Model
 
 
     /**
+     * Get the Place of Service that the encounter belongs to.
+     */
+    public function placeOfService()
+    {
+        return $this->hasOne(PlaceOfService::class, 'id', 'placeOfServiceID')->withDefault();
+    }
+
+
+    /**
      * Get the Rendering Doctor that the encounter belongs to.
      */
     public function renderingDoctor()
@@ -155,7 +165,7 @@ class Encounter extends Model
      */
     public function problemTab()
     {
-        return $this->hasOne(Problem::class, 'encounter', 'encounter');
+        return $this->hasOne(Problem::class, 'encounterProb', 'encounter');
     }
 
 
@@ -166,7 +176,7 @@ class Encounter extends Model
      */
     public function miscellaneousTab()
     {
-        return $this->hasOne(Miscellaneous::class, 'encounter', 'encounter');
+        return $this->hasOne(Miscellaneous::class, 'encounterMisc', 'encounter');
     }
 
 
@@ -177,7 +187,7 @@ class Encounter extends Model
      */
     public function labTab()
     {
-        return $this->hasOne(Lab::class, 'encounter', 'encounter');
+        return $this->hasOne(Lab::class, 'encounterLab', 'encounter');
     }
 
 

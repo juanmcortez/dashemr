@@ -16,7 +16,7 @@ class Problem extends Model
      *
      * @var string
      */
-    protected $primaryKey = 'encounter';
+    protected $primaryKey = 'encounterProb';
 
 
     /**
@@ -25,7 +25,7 @@ class Problem extends Model
      * @var array
      */
     protected $fillable = [
-        'encounter',
+        'encounterProb',
         'conditionOriginatedDate',
         'firstConsultedDate',
         'lastSeenDate',
@@ -44,7 +44,7 @@ class Problem extends Model
      * @var array
      */
     protected $hidden = [
-        'encounter',
+        'encounterProb',
         'created_at',
         'updated_at',
         'deleted_at',

@@ -55,7 +55,7 @@ import MenuLink from '@/Components/dashemr/MenuLink.vue';
 
         <MenuSplit />
 
-        <MenuLink :linkurl="route('practice.settings')" :active="route().current('practice.*')"
+        <MenuLink :linkurl="route('settings.practice')" :active="route().current('settings.practice')"
             tooltip="Practice settings">
             <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"

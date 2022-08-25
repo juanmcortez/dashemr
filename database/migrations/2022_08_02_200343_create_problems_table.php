@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('problems', function (Blueprint $table) {
-            $table->foreignId('encounter')->constrained('encounters', 'encounter');
+            $table->foreignId('encounterProb')->primary()->index()->unique()->constrained('encounters', 'encounter');
 
             $table->dateTime('conditionOriginatedDate')->nullable();
             $table->dateTime('firstConsultedDate')->nullable();

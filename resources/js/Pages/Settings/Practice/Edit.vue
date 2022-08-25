@@ -1,6 +1,7 @@
 <script setup>
 import SiteHeader from '@/Components/dashemr/LayoutParts/SiteHeader.vue';
 import Layout from '@/Layouts/newDesign.vue';
+import DashEMRInput from '@/Components/dashemr/inputField.vue';
 import DashEMRCheck from '@/Components/dashemr/checkField.vue';
 import DashEMRSelect from '@/Components/dashemr/SelectField.vue';
 import DashEMRDivider from '@/Components/dashemr/PageTitleDivider.vue';
@@ -31,7 +32,14 @@ const props = defineProps({
         <template #PageHeader>Practice Settings</template>
 
         <template #PageContent>
-            <DashEMRDivider>Practice Type Settings</DashEMRDivider>
+            <div class="flex flex-row w-full mb-10">
+                <div class="w-2/12 pr-2 leading-10 text-right">Practice Name</div>
+                <div class="w-10/12">
+                    <DashEMRInput name="practiceName" />
+                </div>
+                <div class="w-2/12 pr-2 leading-10 text-right">&nbsp;</div>
+                <div class="w-10/12">&nbsp;</div>
+            </div>
 
             <div class="flex flex-row w-full">
                 <div class="w-1/12 pr-2 text-right">

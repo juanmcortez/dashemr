@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use App\Models\Invoices\Charge;
 use Illuminate\Database\Seeder;
 use App\Models\Patients\Patient;
+use App\Models\Settings\Options;
 use App\Models\Doctors\Referring;
 use App\Models\Doctors\Rendering;
 use App\Models\Settings\Practice;
@@ -18,6 +19,7 @@ use App\Models\Invoices\Extras\Problem;
 use App\Models\Invoices\Extras\Anesthesia;
 use App\Models\Invoices\Extras\SpecialCode;
 use App\Models\Invoices\Extras\Miscellaneous;
+use Database\Seeders\Patients\OptionsClonerSeeder;
 use Database\Seeders\Locations\PlaceOfServiceSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
@@ -55,10 +57,15 @@ class PatientClonerSeeder extends Seeder
         } else {
             $practice['isLabPractice'] = false;
         }
+        $practice['created_at'] = $practice['updated_at'] = now();
         Practice::insert($practice);
 
         $this->command->line('         <bg=green;fg=white> DONE </> Creating practice settings items.');
         $this->command->newLine();
+
+
+        // Create the Options Information
+        $this->call(OptionsClonerSeeder::class, true, ['chunkItems' => $chunkItems]);
 
 
         // Connect to the original database and retrieve information.
@@ -363,7 +370,14 @@ class PatientClonerSeeder extends Seeder
                     $extraData[$tab][$field] = null;
                     foreach ($extraFields as $fieldItems) {
                         if ($fieldItems->id_tab == $tab && $fieldItems->id_field == $field) {
-                            $extraData[$tab][$field] = (empty($fieldItems->field_value)) ? null : $fieldItems->field_value;
+                            if (!empty($fieldItems->field_value)) {
+                                // Get the value from our system options.
+                                $systemValue = Options::where('itemDescr', '=', trim($fieldItems->field_value))->first('itemValue');
+                                $extraData[$tab][$field] = (empty($systemValue->itemValue)) ? $fieldItems->field_value : $systemValue->itemValue;
+                            } else {
+                                // No value
+                                $extraData[$tab][$field] = null;
+                            }
                         }
                     }
                 }

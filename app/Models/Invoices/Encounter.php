@@ -4,6 +4,7 @@ namespace App\Models\Invoices;
 
 use App\Models\Invoices\Charge;
 use App\Models\Patients\Patient;
+use App\Models\Settings\Options;
 use App\Models\Doctors\Referring;
 use App\Models\Doctors\Rendering;
 use App\Models\Locations\Facility;
@@ -161,96 +162,30 @@ class Encounter extends Model
     /**
      * Load all the options for the selects on tabs
      *
-     * @return void
+     * @return array
      */
     public function loadOptions()
     {
-        $illnessAccidentPregnancy = [
-            [
-                'value'         => '',
-                'description'   => '---',
-            ],
-        ];
-        $claimReason = [
-            [
-                'value'         => '',
-                'description'   => '---',
-            ],
-        ];
-        $delayReason = [
-            [
-                'value'         => '',
-                'description'   => '---',
-            ],
-        ];
-        $claimNote = [
-            [
-                'value'         => '',
-                'description'   => '---',
-            ],
-        ];
-        $lineNote = [
-            [
-                'value'         => '',
-                'description'   => '---',
-            ],
-        ];
-        $reportType = [
-            [
-                'value'         => '',
-                'description'   => '---',
-            ],
-        ];
-        $reportTransmission = [
-            [
-                'value'         => '',
-                'description'   => '---',
-            ],
-        ];
-        $condition1 = $condition2 = $condition3 = [
-            [
-                'value'         => '',
-                'description'   => '---',
-            ],
-        ];
-        $locationCode = [
-            [
-                'value'         => '',
-                'description'   => '---',
-            ],
-        ];
-        $locationName = [
-            [
-                'value'         => '',
-                'description'   => '---',
-            ],
-        ];
-        $referenceLab = [
-            [
-                'value'         => '',
-                'description'   => '---',
-            ],
-        ];
-
+        $selectData = new Options;
         return [
             'problemTab' => [
-                'illnessAccidentPregnancy' => $illnessAccidentPregnancy,
+                'illnessAccidentPregnancy'  => $selectData->getSelectOptions('illnessaccidentpregnancy'),
             ],
             'miscTab' => [
-                'claimReason'           => $claimReason,
-                'delayReason'           => $delayReason,
-                'claimNote'             => $claimNote,
-                'lineNote'              => $lineNote,
-                'reportType'            => $reportType,
-                'reportTransmission'    => $reportTransmission,
-                'condition1'            => $condition1,
-                'condition2'            => $condition2,
-                'condition3'            => $condition3,
+                'claimReason'               => $selectData->getSelectOptions('claimreason'),
+                'delayReason'               => $selectData->getSelectOptions('delayreason'),
+                'claimNote'                 => $selectData->getSelectOptions('claimnote'),
+                'lineNote'                  => $selectData->getSelectOptions('linenote'),
+                'reportType'                => $selectData->getSelectOptions('reporttype'),
+                'reportTransmission'        => $selectData->getSelectOptions('reporttransmission'),
+                'condition1'                => $selectData->getSelectOptions('misccondition'),
+                'condition2'                => $selectData->getSelectOptions('misccondition'),
+                'condition3'                => $selectData->getSelectOptions('misccondition'),
             ],
             'labTab' => [
-                'locationCode' => $locationCode,
-                'locationName' => $locationName,
-                'referenceLab' => $referenceLab,
+                'locationCode'              => $selectData->getSelectOptions('locationcodes', 'value'),
+                'locationName'              => $selectData->getSelectOptions('locationcodes'),
+                'referenceLab'              => $selectData->getSelectOptions('referencelab'),
             ],
         ];
     }

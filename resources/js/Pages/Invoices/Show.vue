@@ -37,7 +37,7 @@ const props = defineProps({
             <EncounterTabs :prob="invoice.problem_tab" :misc="invoice.miscellaneous_tab" :lab="invoice.lab_tab"
                 :options="options" :showLab="practice.isLabPractice" />
 
-            <EncounterDetails :invoice="invoice" />
+            <EncounterDetails :invoice="invoice" :doctors="options.doctors" :facilities="options.facilities" />
 
             <ChargesTable :charges="invoice.charges_list" />
 

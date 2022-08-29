@@ -168,6 +168,15 @@ class Encounter extends Model
     {
         $selectData = new Options;
         return [
+            'facilities' => [
+                'service'                   => $selectData->getFacilites('service'),
+                'billing'                   => $selectData->getFacilites('billing'),
+                'placeOfService'            => $selectData->getFacilites('placeOfService'),
+            ],
+            'doctors' => [
+                'rendering'                 => $selectData->getSelectDoctors('rendering'),
+                'referring'                 => $selectData->getSelectDoctors('referring'),
+            ],
             'problemTab' => [
                 'illnessAccidentPregnancy'  => $selectData->getSelectOptions('illnessaccidentpregnancy'),
             ],

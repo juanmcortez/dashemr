@@ -1,7 +1,6 @@
 <script setup>
 const props = defineProps({
     selected: {
-        type: String,
         default: null,
     },
     options: {

@@ -11,7 +11,9 @@ const props = defineProps({
     <table class="w-full text-sm border border-b-0 border-collapse shadow-sm bg-slate-200 border-slate-400">
         <thead class="bg-slate-50">
             <tr>
-                <th class="p-2 font-semibold text-center border border-b-0 border-slate-300 text-slate-900">Charges</th>
+                <th class="p-2 font-semibold text-center border border-b-0 border-slate-300 text-slate-900 leading-10">
+                    Charges
+                </th>
             </tr>
         </thead>
     </table>

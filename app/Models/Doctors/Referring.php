@@ -66,7 +66,6 @@ class Referring extends Model
      * @var array
      */
     protected $hidden = [
-        'id',
         'title',
         'authorized',
         'upin',

@@ -10,7 +10,7 @@ onMounted(() => {
 </script>
 <template>
     <input type="text" ref="input" :value="(!props.value) ? '--' : props.value" :class="[
-        'w-full m-0 border-0 border-b leading-4 bg-transparent border-zinc-300 focus:border-zinc-400 focus:ring-transparent placeholder:text-zinc-400 text-xs',
+        'w-full m-0 border-0 border-b leading-5 pt-2.5 pb-1 bg-transparent border-zinc-300 focus:border-zinc-400 focus:ring-transparent placeholder:text-zinc-400 text-sm',
         (!props.value) ? 'text-zinc-400' : 'text-zinc-600'
     ]" />
 </template>

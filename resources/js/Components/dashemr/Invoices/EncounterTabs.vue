@@ -61,21 +61,21 @@ const openLab = ref(false);
 
 
             <!-- Problem content -->
-            <div :class="['px-8 py-6 flex flex-col', (openProblem) ? '' : 'hidden']">
+            <div :class="['px-8 py-6 flex flex-col text-sm', (openProblem) ? '' : 'hidden']">
                 <ProblemContent :content="prob" :options="options.problemTab" />
             </div>
             <!-- Problem content -->
 
 
             <!-- Miscellaneous content -->
-            <div :class="['px-8 py-6 flex flex-col', (openMisc) ? '' : 'hidden']">
+            <div :class="['px-8 py-6 flex flex-col text-sm', (openMisc) ? '' : 'hidden']">
                 <MiscellaneousContent :content="misc" :options="options.miscTab" />
             </div>
             <!-- Miscellaneous content -->
 
 
             <!-- Lab content -->
-            <div v-if="showLab" :class="['px-8 py-6 flex flex-col', (openLab) ? '' : 'hidden']">
+            <div v-if="showLab" :class="['px-8 py-6 flex flex-col text-sm', (openLab) ? '' : 'hidden']">
                 <LabContent :content="lab" :options="options.labTab" />
             </div>
             <!-- Lab content -->

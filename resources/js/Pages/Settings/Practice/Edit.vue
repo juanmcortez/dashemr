@@ -1,8 +1,8 @@
 <script setup>
 import SiteHeader from '@/Components/dashemr/LayoutParts/SiteHeader.vue';
 import Layout from '@/Layouts/newDesign.vue';
-import DashEMRInput from '@/Components/dashemr/inputField.vue';
-import DashEMRCheck from '@/Components/dashemr/checkField.vue';
+import DashEMRInput from '@/Components/dashemr/InputField.vue';
+import DashEMRCheck from '@/Components/dashemr/CheckField.vue';
 import DashEMRSelect from '@/Components/dashemr/SelectField.vue';
 import DashEMRDivider from '@/Components/dashemr/PageTitleDivider.vue';
 

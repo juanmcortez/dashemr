@@ -462,10 +462,10 @@ table.encounterExtraDetails tbody tr td {
 
 table.encounterExtraDetails tbody tr td {
     @apply align-top;
+}
 
-    &::first-of-type {
-        @apply w-4/6;
-    }
+table.encounterExtraDetails tbody tr td:first-of-type {
+    @apply w-4/6;
 }
 
 table.chargesDetails thead tr th {

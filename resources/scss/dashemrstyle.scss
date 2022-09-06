@@ -317,8 +317,8 @@ input.textField {
 .content main aside {
     @apply fixed top-0 right-0;
     @apply w-auto h-screen;
-    @apply transition-all duration-300;
     @apply text-xs;
+    @apply transition-all duration-300 ease-in-out;
     // @apply hidden;
 }
 
@@ -327,19 +327,22 @@ input.textField {
     @apply absolute top-0;
     @apply flex flex-row;
     @apply -rotate-90;
+    @apply transition-all duration-150 ease-in-out;
 }
 
 .content main aside .tabSelector li {
     @apply px-4 py-1 mr-2;
-    @apply border-zinc-500 border-x;
     @apply cursor-pointer;
+    @apply border-zinc-500 border-x;
+    @apply transition-all duration-150 ease-in-out;
 }
 
 .content main aside .tabContent {
+    @apply p-5 mt-24;
+    @apply w-[550px];
     @apply text-xs;
     @apply bg-zinc-200 border border-zinc-400 shadow-md;
-    @apply w-[550px];
-    @apply p-5 mt-28;
+    @apply transition-all duration-150 ease-in-out;
 }
 
 .content main aside .tabContent .holder {

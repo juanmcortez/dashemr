@@ -32,7 +32,7 @@ const openLab = ref(false);
 <template>
     <ul :class="[
         'tabSelector',
-        (showLab) ? (openProblem || openMisc || openLab) ? '-left-[159px]  mt-[255px]' : '-left-[160px]  mt-[255px]'
+        (showLab) ? (openProblem || openMisc || openLab) ? '-left-[159px]  mt-[235px]' : '-left-[160px]  mt-[235px]'
                   : (openProblem || openMisc || openLab) ? '' : ''
     ]">
         <li v-if="showLab" @click="openLab = !openLab, openMisc = openProblem = false" :class="[

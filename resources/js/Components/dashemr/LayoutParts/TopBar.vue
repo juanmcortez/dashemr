@@ -2,7 +2,7 @@
 import TopMenuLink from '@/Components/dashemr/TopMenuLink.vue';
 </script>
 <template>
-    <section class="fixed z-50 flex justify-end w-full h-6 border-b bg-zinc-200 border-zinc-100">
+    <header>
         <TopMenuLink tooltip="No notfications available">
             <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -10,7 +10,7 @@ import TopMenuLink from '@/Components/dashemr/TopMenuLink.vue';
                 </path>
             </svg>
         </TopMenuLink>
-        <div class="mx-2 my-1 text-xs text-zinc-400">Aug 10, 2022</div>
-        <div class="mx-2 my-1 text-xs text-zinc-400">v1.0.0</div>
-    </section>
+        <div class="versionDate">Aug 10, 2022</div>
+        <div class="systemVersion">v1.0.0</div>
+    </header>
 </template>

@@ -1,0 +1,563 @@
+*,
+*::before,
+*::after {
+    @apply m-0 p-0;
+    @apply box-border antialiased;
+    @apply leading-4 tracking-normal;
+}
+
+html,
+body {
+    @apply m-0 p-0;
+    @apply box-border antialiased;
+    @apply leading-4 tracking-normal font-sans text-base text-gray-800;
+    @apply h-full w-full;
+}
+
+#app {
+    @apply flex flex-col;
+    @apply min-w-full min-h-screen;
+}
+
+#app>header {
+    @apply flex flex-row justify-end;
+    @apply bg-zinc-50 border-b border-zinc-200;
+}
+
+input.checkField {
+    @apply m-0 mt-2.5;
+    @apply leading-4 text-zinc-600;
+    @apply bg-transparent rounded border-zinc-300;
+
+    &:focus {
+        @apply border-zinc-400 ring-transparent;
+    }
+
+    &::placeholder {
+        @apply text-zinc-400;
+    }
+}
+
+input.textField {
+    @apply w-full;
+    @apply m-0 pt-2.5 pb-1;
+    @apply border-0 border-b bg-transparent border-zinc-300;
+    @apply text-sm leading-5;
+
+    &:focus {
+        @apply border-zinc-400 ring-transparent;
+    }
+
+    &::placeholder {
+        @apply text-zinc-400;
+    }
+}
+
+.selectField {
+    @apply pb-1;
+    @apply w-full;
+    @apply text-sm leading-6;
+    @apply bg-transparent border rounded border-zinc-300;
+
+    &:hover {
+        @apply cursor-pointer;
+    }
+
+    &:focus {
+        @apply border-zinc-400 ring-transparent;
+    }
+
+    &::placeholder {
+        @apply text-zinc-400;
+    }
+}
+
+.textareaField {
+    @apply w-full;
+    @apply text-sm leading-6;
+    @apply border-0 resize-none;
+
+    &:focus {
+        @apply border-zinc-400 ring-transparent ring-zinc-400;
+    }
+
+    &::placeholder {
+        @apply text-sm text-zinc-400;
+    }
+}
+
+.versionDate {
+    @apply pt-1.5 ml-3;
+    @apply text-xxs leading-3 text-zinc-400;
+}
+
+.systemVersion {
+    @apply pt-1.5 mx-4;
+    @apply text-xxs leading-3 text-zinc-400;
+}
+
+.wrapper {
+    @apply flex flex-auto;
+}
+
+.navigation {
+    @apply flex flex-row;
+    @apply py-5;
+    @apply bg-zinc-100 border-r border-zinc-200;
+}
+
+.navigation nav {
+    @apply flex-grow-0 flex flex-col;
+    @apply w-14;
+}
+
+.navigation nav h1 {
+    @apply w-8 h-8;
+    @apply p-1.5 mx-auto;
+    @apply rounded-3xl;
+    @apply cursor-pointer;
+    @apply bg-zinc-500 fill-white;
+
+    &:hover {
+        @apply bg-zinc-700 fill-white;
+    }
+}
+
+.iconBtnTooltip {
+    @apply w-auto;
+    @apply p-2 m-2;
+    @apply absolute min-w-max left-14;
+    @apply text-xs font-bold text-white;
+    @apply transition-all duration-200 origin-left scale-0;
+    @apply bg-gray-900 rounded-md shadow-md;
+}
+
+.iconBtn {
+    @apply w-10 h-10;
+    @apply mx-auto my-2;
+    @apply relative flex items-center;
+    @apply transition-all duration-300 ease-linear;
+    @apply cursor-pointer;
+
+    &:hover {
+        @apply bg-green-600 text-white rounded-xl;
+    }
+}
+
+.iconBtnTooltipOpen {
+    @apply font-semibold text-green-500;
+    @apply bg-gray-800 rounded-3xl;
+}
+
+.iconBtnTooltipClosed {
+    @apply font-semibold text-white;
+    @apply bg-green-600 rounded-xl;
+}
+
+.topMenuBtnTooltip {
+    @apply px-4 py-1 mx-auto;
+    @apply w-auto;
+    @apply absolute min-w-max right-5 top-6;
+    @apply text-xs font-bold text-white;
+    @apply transition-all duration-150 origin-bottom scale-0;
+    @apply bg-zinc-700 rounded-md shadow-md;
+}
+
+.topMenuBtn {
+    @apply w-6 h-6;
+    @apply mx-auto;
+    @apply relative;
+    @apply transition-all duration-150 ease-in-out;
+}
+
+.topMenuBtnTooltipOpen {
+    @apply w-4 h-4;
+    @apply absolute left-1 top-1;
+    @apply text-red-200;
+}
+
+.topMenuBtnTooltipClose {
+    @apply w-4 h-4;
+    @apply absolute left-1 top-1;
+    @apply text-red-500;
+}
+
+.logoutBtn {
+    @apply w-6 h-6;
+    @apply pt-0.5 pl-0.5;
+    @apply overflow-hidden;
+    @apply uppercase text-xs text-red-500;
+    @apply rounded-md;
+
+    &:hover {
+        @apply text-red-100 bg-red-800;
+    }
+}
+
+.iconBtnBase {
+    @apply absolute left-1.5 top-1.5;
+    @apply w-4 h-4;
+}
+
+.logoutBtnBase {
+    @apply mx-auto;
+    @apply w-7 h-7;
+    @apply relative;
+    @apply transition-all duration-150 ease-in-out;
+    @apply rounded-3xl;
+}
+
+.menuWrapper {
+    @apply flex-auto;
+    @apply m-0 p-0;
+}
+
+.menuSplit {
+    @apply w-7;
+    @apply mx-auto my-5;
+    @apply border border-zinc-200;
+}
+
+.menuLink {
+    @apply mb-5;
+}
+
+.menuLinkBottom {
+    @apply mx-auto;
+}
+
+.tooltip {
+    @apply absolute left-8;
+    @apply min-w-max;
+    @apply w-auto px-4 py-1 my-0.5;
+    @apply text-xs font-bold text-white;
+    @apply transition-all duration-150 origin-left scale-0;
+    @apply rounded-md shadow-sm;
+    @apply bg-zinc-700;
+}
+
+.navigation section {
+    @apply w-40;
+    // @apply bg-amber-200;
+    @apply hidden;
+}
+
+.content {
+    @apply flex flex-col flex-auto;
+    @apply w-10/12;
+}
+
+.content header {
+    @apply flex justify-between;
+    @apply px-5 py-4;
+    @apply text-2xl leading-10 font-bold;
+    @apply bg-zinc-100 border-b border-zinc-200;
+}
+
+.content header h2 {
+    @apply flex justify-between;
+    @apply px-0 py-3;
+    @apply text-2xl leading-10 font-bold;
+}
+
+.pageDivider {
+    @apply relative w-full py-8;
+}
+
+.pageDivider .pageHeader {
+    @apply py-3 px-6;
+    @apply w-[270px];
+    @apply absolute left-0 top-[7px];
+    @apply text-lg font-semibold text-center;
+    @apply bg-white border-x border-zinc-200;
+}
+
+.pageDivider .pageHeader+hr {
+    @apply mb-10 border-zinc-200;
+}
+
+.searchBox {
+    @apply text-xs text-zinc-100 leading-none;
+    @apply ring-0 rounded-3xl;
+    @apply bg-zinc-300 border-none;
+    @apply px-4 py-0 m-0;
+    @apply w-32 h-auto;
+    @apply transition-all duration-150 origin-right;
+
+    &:focus {
+        @apply bg-zinc-400 ring-0;
+        @apply w-80;
+    }
+
+    &::placeholder {
+        @apply text-zinc-100;
+    }
+}
+
+.content main {
+    @apply flex flex-row flex-auto;
+}
+
+.content main section {
+    @apply order-first;
+    @apply flex flex-col flex-auto;
+}
+
+.content main section article {
+    @apply p-5;
+    @apply text-sm;
+}
+
+.content main section footer {
+    @apply pt-7 pb-6 px-7;
+    @apply text-xxs leading-3 text-zinc-400 text-right;
+    @apply border-t border-zinc-200;
+}
+
+.content main aside {
+    @apply fixed top-0 right-0;
+    @apply w-auto h-screen;
+    @apply transition-all duration-300;
+    @apply text-xs;
+    // @apply hidden;
+}
+
+.content main aside .tabSelector {
+    @apply text-xs;
+    @apply absolute top-0;
+    @apply flex flex-row;
+    @apply -rotate-90;
+}
+
+.content main aside .tabSelector li {
+    @apply px-4 py-1 mr-2;
+    @apply border-zinc-500 border-x;
+    @apply cursor-pointer;
+}
+
+.content main aside .tabContent {
+    @apply text-xs;
+    @apply bg-zinc-200 border border-zinc-400 shadow-md;
+    @apply w-[550px];
+    @apply p-5 mt-28;
+}
+
+.content main aside .tabContent .holder {
+    @apply flex w-full pb-2.5;
+
+    &::last-of-type {
+        @apply pb-0;
+    }
+}
+
+.content main aside .tabContent .holder .label {
+    @apply w-5/12 font-semibold leading-10 text-right;
+}
+
+.content main aside .tabContent .holder .content {
+    @apply w-7/12 pl-3;
+}
+
+table {
+    @apply w-full h-auto;
+    @apply border border-collapse border-zinc-300 bg-zinc-100;
+    @apply shadow-sm;
+}
+
+table+table {
+    @apply mt-5;
+}
+
+table thead {
+    @apply bg-zinc-50;
+}
+
+table thead tr {
+    // no usage
+}
+
+table thead tr th {
+    @apply p-4;
+    @apply w-auto;
+    @apply border border-zinc-300;
+    @apply font-semibold text-zinc-900 text-center;
+}
+
+table tbody {
+    // no usage
+}
+
+table tbody a {
+    @apply table-row;
+    @apply cursor-pointer;
+
+    &:nth-child(odd) {
+        @apply bg-zinc-100;
+    }
+
+    &:nth-child(even) {
+        @apply bg-zinc-50;
+    }
+
+    &:hover {
+        @apply bg-zinc-200;
+    }
+}
+
+table tbody a td {
+    @apply p-3;
+    @apply w-auto;
+    @apply border border-zinc-300;
+    @apply font-semibold text-zinc-500;
+}
+
+table tbody tr {
+    &:nth-child(odd) {
+        @apply bg-zinc-100;
+    }
+
+    &:nth-child(even) {
+        @apply bg-zinc-50;
+    }
+}
+
+table tbody tr td {
+    @apply p-3;
+    @apply w-auto;
+    @apply border border-zinc-300;
+    @apply font-semibold text-zinc-500;
+}
+
+table tbody tr.results td {
+    @apply text-center align-top;
+}
+
+table tbody tr.results td table.details,
+table tbody tr.results td table.details tbody,
+table tbody tr.results td table.details tbody tr,
+table tbody tr.results td table.details tbody tr td {
+    @apply shadow-none border-0;
+}
+
+table tbody tr.results td table.details tbody tr td {
+    @apply border-r border-b bg-transparent;
+}
+
+table tbody tr.results td table.details tbody tr:last-of-type td {
+    @apply border-b-0;
+}
+
+table tbody tr td.noResults {
+    @apply text-center font-semibold text-red-600;
+    @apply bg-red-100;
+}
+
+table.encounterDetails tbody tr td,
+table.encounterExtraDetails tbody tr td {
+    @apply w-1/6 text-center;
+}
+
+table.encounterExtraDetails tbody tr td {
+    @apply align-top;
+
+    &::first-of-type {
+        @apply w-4/6;
+    }
+}
+
+table.chargesDetails thead tr th {
+    @apply bg-zinc-200 border-b-0 shadow-none;
+}
+
+table.chargesDetails+table.chargeItem {
+    @apply mt-0;
+}
+
+table.chargeItem tbody tr td.label {
+    @apply font-semibold text-right border-r-0 text-zinc-700 pr-0 w-1/12;
+}
+
+table.chargeItem tbody tr td.label+td {
+    @apply border-l-0 w-1/12;
+}
+
+.patientInfo {
+    @apply flex flex-row;
+    @apply w-4/6;
+    @apply mt-0.5;
+}
+
+.patientInfo .dataBox {
+    @apply flex-col flex-1;
+}
+
+.patientInfo .dataBox .dataLine {
+    @apply flex flex-row;
+    @apply pb-1.5;
+
+    &::last-of-type {
+        @apply pt-1.5 pb-0;
+        @apply border-none;
+    }
+}
+
+.patientInfo .dataBox .dataLine .label {
+    @apply w-3/12;
+    @apply pr-2;
+    @apply leading-3 text-xs font-bold text-right text-zinc-400;
+}
+
+.patientInfo .dataBox .dataLine .label svg {
+    @apply float-right;
+}
+
+.patientInfo .dataBox .dataLine .info {
+    @apply w-9/12;
+    @apply leading-3 text-xs font-normal;
+}
+
+.paginator {
+    @apply flex flex-row justify-between;
+    @apply mt-5 pt-5 px-5;
+    @apply w-full;
+    @apply border-t border-zinc-200;
+}
+
+.paginator .access {
+    @apply flex;
+}
+
+.paginator .access a {
+    @apply flex justify-center;
+    @apply mx-1 pt-0;
+    @apply w-7 h-7;
+    @apply leading-8 text-xxs text-center text-zinc-500;
+    @apply cursor-pointer rounded-3xl;
+    @apply bg-zinc-200;
+
+    &:hover {
+        @apply text-zinc-50;
+        @apply bg-zinc-800;
+    }
+}
+
+.paginator .access .split {
+    @apply leading-6;
+    @apply w-7 h-7;
+    @apply px-2;
+}
+
+.paginator .access .active a {
+    @apply bg-zinc-500;
+    @apply text-zinc-50 font-semibold;
+}
+
+.paginator .detail {
+    @apply pt-1.5;
+    @apply text-xs leading-3;
+    @apply text-zinc-400;
+}
+
+.paginator .detail strong {
+    @apply text-zinc-500;
+}

@@ -67,7 +67,6 @@ class Rendering extends Model
      * @var array
      */
     protected $hidden = [
-        'id',
         'title',
         'firstName',
         'middleName',

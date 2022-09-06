@@ -4,6 +4,7 @@ namespace App\Models\Invoices;
 
 use App\Models\Invoices\Charge;
 use App\Models\Patients\Patient;
+use App\Models\Settings\Options;
 use App\Models\Doctors\Referring;
 use App\Models\Doctors\Rendering;
 use App\Models\Locations\Facility;
@@ -155,6 +156,47 @@ class Encounter extends Model
     public function supervisingDoctor()
     {
         return $this->hasOne(Referring::class, 'id', 'supervisingProviderID')->withDefault();
+    }
+
+
+    /**
+     * Load all the options for the selects on tabs
+     *
+     * @return array
+     */
+    public function loadOptions()
+    {
+        $selectData = new Options;
+        return [
+            'facilities' => [
+                'service'                   => $selectData->getFacilites('service'),
+                'billing'                   => $selectData->getFacilites('billing'),
+                'placeOfService'            => $selectData->getFacilites('placeOfService'),
+            ],
+            'doctors' => [
+                'rendering'                 => $selectData->getSelectDoctors('rendering'),
+                'referring'                 => $selectData->getSelectDoctors('referring'),
+            ],
+            'problemTab' => [
+                'illnessAccidentPregnancy'  => $selectData->getSelectOptions('illnessaccidentpregnancy'),
+            ],
+            'miscTab' => [
+                'claimReason'               => $selectData->getSelectOptions('claimreason'),
+                'delayReason'               => $selectData->getSelectOptions('delayreason'),
+                'claimNote'                 => $selectData->getSelectOptions('claimnote'),
+                'lineNote'                  => $selectData->getSelectOptions('linenote'),
+                'reportType'                => $selectData->getSelectOptions('reporttype'),
+                'reportTransmission'        => $selectData->getSelectOptions('reporttransmission'),
+                'condition1'                => $selectData->getSelectOptions('misccondition'),
+                'condition2'                => $selectData->getSelectOptions('misccondition'),
+                'condition3'                => $selectData->getSelectOptions('misccondition'),
+            ],
+            'labTab' => [
+                'locationCode'              => $selectData->getSelectOptions('locationcodes', 'value'),
+                'locationName'              => $selectData->getSelectOptions('locationcodes'),
+                'referenceLab'              => $selectData->getSelectOptions('referencelab'),
+            ],
+        ];
     }
 
 

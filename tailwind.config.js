@@ -42,6 +42,9 @@ module.exports = {
             fontFamily: {
                 sans: ['Amiko', ...defaultTheme.fontFamily.sans],
             },
+            fontSize: {
+                'xxs': '.6rem',
+            }
         },
     },
     plugins: [

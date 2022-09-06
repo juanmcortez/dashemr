@@ -27,7 +27,7 @@ class PatientController extends Controller
                     ->orderBy('middleName')
                     ->whereColumn('demographics.pid', 'patients.pid')
             )
-            ->paginate(100);
+            ->paginate(50);
         return Inertia::render('Patients/Table', ['patients' => $patients]);
     }
 

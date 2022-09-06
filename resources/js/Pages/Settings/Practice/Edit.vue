@@ -1,6 +1,6 @@
 <script setup>
+import Layout from '@/Layouts/DashEMRLogin.vue';
 import SiteHeader from '@/Components/dashemr/LayoutParts/SiteHeader.vue';
-import Layout from '@/Layouts/newDesign.vue';
 import DashEMRInput from '@/Components/dashemr/InputField.vue';
 import DashEMRCheck from '@/Components/dashemr/CheckField.vue';
 import DashEMRSelect from '@/Components/dashemr/SelectField.vue';

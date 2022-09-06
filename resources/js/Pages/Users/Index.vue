@@ -1,6 +1,6 @@
 <script setup>
+import Layout from '@/Layouts/DashEMRLogin.vue';
 import SiteHeader from '@/Components/dashemr/LayoutParts/SiteHeader.vue';
-import Layout from '@/Layouts/newDesign.vue';
 
 const props = defineProps({
     user: {

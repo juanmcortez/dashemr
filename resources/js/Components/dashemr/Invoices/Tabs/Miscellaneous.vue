@@ -14,100 +14,100 @@ const props = defineProps({
 });
 </script>
 <template>
-    <div class="flex w-full pb-2.5">
-        <div class="w-5/12 font-semibold leading-10 text-right">Mammography certificate #</div>
-        <div class="w-7/12 pl-3">
+    <div class="holder">
+        <div class="label">Mammography certificate #</div>
+        <div class="content">
             <DashEMRinput name="mammographyCertificateNumber" :value="content.mammographyCertificateNumber" disabled />
         </div>
     </div>
-    <div class="flex w-full pb-2.5">
-        <div class="w-5/12 font-semibold leading-10 text-right">Claim reason</div>
-        <div class="w-7/12 pl-3">
+    <div class="holder">
+        <div class="label">Claim reason</div>
+        <div class="content">
             <DashEMRSelect name="claimReason" :selected="content.claimReason" :options="options.claimReason" disabled />
         </div>
     </div>
-    <div class="flex w-full pb-2.5">
-        <div class="w-5/12 font-semibold leading-10 text-right">Original reference #</div>
-        <div class="w-7/12 pl-3">
+    <div class="holder">
+        <div class="label">Original reference #</div>
+        <div class="content">
             <DashEMRinput name="originalReferenceNumber" :value="content.originalReferenceNumber" disabled />
         </div>
     </div>
-    <div class="flex w-full pb-2.5">
-        <div class="w-5/12 font-semibold leading-10 text-right">Delay reason</div>
-        <div class="w-7/12 pl-3">
+    <div class="holder">
+        <div class="label">Delay reason</div>
+        <div class="content">
             <DashEMRSelect name="delayReason" :selected="content.delayReason" :options="options.delayReason" disabled />
         </div>
     </div>
-    <div class="flex w-full pb-2.5">
-        <div class="w-5/12 font-semibold leading-10 text-right">Claim note</div>
-        <div class="w-7/12 pl-3">
+    <div class="holder">
+        <div class="label">Claim note</div>
+        <div class="content">
             <DashEMRSelect name="claimNote" :selected="content.claimNote" :options="options.claimNote" disabled />
         </div>
     </div>
-    <div class="flex w-full pb-2.5">
-        <div class="w-5/12 font-semibold leading-10 text-right">Code claim note</div>
-        <div class="w-7/12 pl-3">
+    <div class="holder">
+        <div class="label">Code claim note</div>
+        <div class="content">
             <DashEMRinput name="codeClaimNote" :value="content.codeClaimNote" disabled />
         </div>
     </div>
-    <div class="flex w-full pb-2.5">
-        <div class="w-5/12 font-semibold leading-10 text-right">Line note</div>
-        <div class="w-7/12 pl-3">
+    <div class="holder">
+        <div class="label">Line note</div>
+        <div class="content">
             <DashEMRSelect name="lineNote" :selected="content.lineNote" :options="options.lineNote" disabled />
         </div>
     </div>
-    <div class="flex w-full pb-2.5">
-        <div class="w-5/12 font-semibold leading-10 text-right">Code Line note</div>
-        <div class="w-7/12 pl-3">
+    <div class="holder">
+        <div class="label">Code Line note</div>
+        <div class="content">
             <DashEMRinput name="codeLineNote" :value="content.codeLineNote" disabled />
         </div>
     </div>
-    <div class="flex w-full pb-2.5">
-        <div class="w-5/12 font-semibold leading-10 text-right">Report type</div>
-        <div class="w-7/12 pl-3">
+    <div class="holder">
+        <div class="label">Report type</div>
+        <div class="content">
             <DashEMRSelect name="reportType" :selected="content.reportType" :options="options.reportType" disabled />
         </div>
     </div>
-    <div class="flex w-full pb-2.5">
-        <div class="w-5/12 font-semibold leading-10 text-right">Report transmission</div>
-        <div class="w-7/12 pl-3">
+    <div class="holder">
+        <div class="label">Report transmission</div>
+        <div class="content">
             <DashEMRSelect name="reportTransmission" :selected="content.reportTransmission"
                 :options="options.reportTransmission" disabled />
         </div>
     </div>
-    <div class="flex w-full pb-2.5">
-        <div class="w-5/12 font-semibold leading-10 text-right">Attachment control #</div>
-        <div class="w-7/12 pl-3">
+    <div class="holder">
+        <div class="label">Attachment control #</div>
+        <div class="content">
             <DashEMRinput name="attachmentControlNumber" :value="content.attachmentControlNumber" disabled />
         </div>
     </div>
-    <div class="flex w-full pb-2.5">
-        <div class="w-5/12 font-semibold leading-10 text-right">Medicaid services EP</div>
-        <div class="w-7/12 pl-3">
+    <div class="holder">
+        <div class="label">Medicaid services EP</div>
+        <div class="content">
             <DashEMRcheck name="medicaidServicesEP" :checked="content.medicaidServicesEP" disabled />
         </div>
     </div>
-    <div class="flex w-full pb-2.5">
-        <div class="w-5/12 font-semibold leading-10 text-right">Referral given</div>
-        <div class="w-7/12 pl-3">
+    <div class="holder">
+        <div class="label">Referral given</div>
+        <div class="content">
             <DashEMRcheck name="referralGiven" :checked="content.referralGiven" disabled />
         </div>
     </div>
-    <div class="flex w-full pb-2.5">
-        <div class="w-5/12 font-semibold leading-10 text-right">Condition 1</div>
-        <div class="w-7/12 pl-3">
+    <div class="holder">
+        <div class="label">Condition 1</div>
+        <div class="content">
             <DashEMRSelect name="condition1" :selected="content.condition1" :options="options.condition1" disabled />
         </div>
     </div>
-    <div class="flex w-full pb-2.5">
-        <div class="w-5/12 font-semibold leading-10 text-right">Condition 2</div>
-        <div class="w-7/12 pl-3">
+    <div class="holder">
+        <div class="label">Condition 2</div>
+        <div class="content">
             <DashEMRSelect name="condition2" :selected="content.condition2" :options="options.condition2" disabled />
         </div>
     </div>
-    <div class="flex w-full">
-        <div class="w-5/12 font-semibold leading-10 text-right">Condition 3</div>
-        <div class="w-7/12 pl-3">
+    <div class="holder">
+        <div class="label">Condition 3</div>
+        <div class="content">
             <DashEMRSelect name="condition3" :selected="content.condition3" :options="options.condition3" disabled />
         </div>
     </div>

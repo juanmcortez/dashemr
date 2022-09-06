@@ -33,29 +33,24 @@ function isEmpty(checkArr) {
 }
 </script>
 <template>
-    <table
-        class="w-full text-sm bg-white border border-collapse shadow-sm border-slate-400 dark:border-slate-500 dark:bg-slate-800">
-        <thead class="bg-slate-50 dark:bg-slate-700">
+    <table>
+        <thead>
             <tr>
-                <th class="p-2 font-semibold text-center border border-slate-300 dark:border-slate-600 text-slate-900 dark:text-slate-200"
-                    v-for="(column, idx) in columns" :key="idx">
+                <th v-for="(column, idx) in columns" :key="idx">
                     {{ column }}
                 </th>
             </tr>
         </thead>
         <tbody v-if="isEmpty(rowsURL) === false">
-            <Link v-for="(row, jdx) in rowsData" :key="jdx" :href="route(rowsURL[1], row[rowsURL[0]])"
-                :class="['table-row cursor-pointer', (jdx % 2) ? 'bg-zinc-50 hover:bg-zinc-200' : 'bg-zinc-100 hover:bg-zinc-200']">
-            <td v-for="(column, kdx) in colData" :key="kdx"
-                :class="['p-2 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400', (kdx == 0 ? 'text-left' : 'text-center')]">
+            <Link v-for="(row, jdx) in rowsData" :key="jdx" :href="route(rowsURL[1], row[rowsURL[0]])">
+            <td v-for="(column, kdx) in colData" :key="kdx" :class="[(kdx == 0 ? 'text-left' : 'text-center')]">
                 {{ getDataFromIndex(column, row) }}
             </td>
             </Link>
         </tbody>
         <tbody v-else>
-            <tr v-for="(row, jdx) in rowsData" :key="jdx" class="table-row">
-                <td v-for="(column, kdx) in colData" :key="kdx"
-                    :class="['p-2 border border-slate-300 dark:border-slate-700 text-slate-500 dark:text-slate-400', (kdx == 0 ? 'text-left' : 'text-center')]">
+            <tr v-for="(row, jdx) in rowsData" :key="jdx">
+                <td v-for="(column, kdx) in colData" :key="kdx" :class="[(kdx == 0 ? 'text-left' : 'text-center')]">
                     {{ getDataFromIndex(column, row) }}
                 </td>
             </tr>

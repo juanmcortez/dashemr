@@ -1,6 +1,6 @@
 <script setup>
+import Layout from '@/Layouts/DashEMRLogin.vue';
 import SiteHeader from '@/Components/dashemr/LayoutParts/SiteHeader.vue';
-import Layout from '@/Layouts/newDesign.vue';
 import LedgerHead from '@/Components/dashemr/Ledger/PatientInfo.vue';
 import EncounterTabs from '@/Components/dashemr/Invoices/EncounterTabs.vue';
 import EncounterDetails from '@/Components/dashemr/Invoices/EncounterDetail.vue';
@@ -33,14 +33,14 @@ const props = defineProps({
         </template>
 
         <template #PageContent>
-
-            <EncounterTabs :prob="invoice.problem_tab" :misc="invoice.miscellaneous_tab" :lab="invoice.lab_tab"
-                :options="options" :showLab="practice.isLabPractice" />
-
             <EncounterDetails :invoice="invoice" :doctors="options.doctors" :facilities="options.facilities" />
 
             <ChargesTable :charges="invoice.charges_list" />
+        </template>
 
+        <template #innerSideBar>
+            <EncounterTabs :prob="invoice.problem_tab" :misc="invoice.miscellaneous_tab" :lab="invoice.lab_tab"
+                :options="options" :showLab="practice.isLabPractice" />
         </template>
     </Layout>
 </template>

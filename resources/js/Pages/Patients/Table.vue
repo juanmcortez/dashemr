@@ -1,6 +1,6 @@
 <script setup>
+import Layout from '@/Layouts/DashEMRLogin.vue';
 import SiteHeader from '@/Components/dashemr/LayoutParts/SiteHeader.vue';
-import Layout from '@/Layouts/newDesign.vue';
 import PatientsTable from '@/Components/dashemr/Table.vue';
 import Paginator from '@/Components/dashemr/Paginator.vue';
 

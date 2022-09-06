@@ -1,6 +1,6 @@
 <script setup>
+import Layout from '@/Layouts/DashEMRLogin.vue';
 import SiteHeader from '@/Components/dashemr/LayoutParts/SiteHeader.vue';
-import Layout from '@/Layouts/newDesign.vue';
 import LedgerHead from '@/Components/dashemr/Ledger/PatientInfo.vue';
 import LedgerAccount from '@/Components/dashemr/Ledger/AccountTotals.vue';
 import LedgerEncounters from '@/Components/dashemr/Ledger/EncountersTable.vue';
